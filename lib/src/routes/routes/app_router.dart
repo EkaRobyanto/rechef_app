@@ -52,8 +52,8 @@ final GoRouter router = GoRouter(
         ),
         GoRoute(
           path: 'register',
-          pageBuilder: (context, state) => const NoTransitionPage(
-            child: Register(),
+          pageBuilder: (context, state) => slideTransitionBT(
+            const Register(),
           ),
         ),
       ],

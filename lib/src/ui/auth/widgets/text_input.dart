@@ -36,14 +36,30 @@ class _TextInputState extends State<TextInput> {
           height: 10,
         ),
         SizedBox(
-          height: 40,
           child: TextFormField(
             style: Styles.font.bold,
             textAlignVertical: TextAlignVertical.center,
             obscureText: widget.label.contains('Sandi') ? _isObsecure : false,
             validator: widget.validator,
             decoration: Styles.input.accent.copyWith(
+              contentPadding: const EdgeInsets.all(10),
               hintText: widget.hint,
+              focusedBorder: OutlineInputBorder(
+                borderSide: BorderSide(
+                  color: Styles.color.primary,
+                ),
+                borderRadius: const BorderRadius.all(
+                  Radius.circular(10),
+                ),
+              ),
+              errorBorder: OutlineInputBorder(
+                borderSide: BorderSide(
+                  color: Styles.color.danger,
+                ),
+                borderRadius: const BorderRadius.all(
+                  Radius.circular(10),
+                ),
+              ),
               errorStyle: Styles.font.sm.copyWith(color: Styles.color.danger),
               suffixIcon: widget.label.contains('Sandi')
                   ? IconButton(
