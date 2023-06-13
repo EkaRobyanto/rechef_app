@@ -54,13 +54,11 @@ class _ShrinkButtonState extends State<ShrinkButton>
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () async {
-        Future.delayed(
-          const Duration(milliseconds: clickAnimationDurationMillis),
-          () => widget.onTap?.call(),
-        );
-        widget.onTap?.call();
+        await Future.delayed(
+            const Duration(milliseconds: clickAnimationDurationMillis));
         _shrinkButtonSize();
         _restoreButtonSize();
+        widget.onTap?.call();
       },
       onTapDown: (_) => _shrinkButtonSize(),
       onTapCancel: _restoreButtonSize,

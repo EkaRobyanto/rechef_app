@@ -4,3 +4,6 @@ extension StringExtension on String {
 
 String googleAuth = 'google_oauth'.png;
 String facebookAuth = 'facebook_oauth'.png;
+String genderDecor = 'gender'.png;
+String genderMale = 'man'.png;
+String genderFemale = 'woman'.png;

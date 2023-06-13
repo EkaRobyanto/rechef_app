@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:rechef_app/src/ui/auth/login.dart';
-import 'package:rechef_app/src/ui/auth/register.dart';
-import 'package:rechef_app/src/ui/auth/splash_screen.dart';
+import 'package:rechef_app/src/presentation/auth/login.dart';
+import 'package:rechef_app/src/presentation/auth/register/optional_step.dart';
+import 'package:rechef_app/src/presentation/auth/register/register.dart';
+import 'package:rechef_app/src/presentation/auth/splash_screen.dart';
 
 CustomTransitionPage<dynamic> slideTransitionRL(page) {
   return CustomTransitionPage(
@@ -54,6 +55,12 @@ final GoRouter router = GoRouter(
           path: 'register',
           pageBuilder: (context, state) => slideTransitionBT(
             const Register(),
+          ),
+        ),
+        GoRoute(
+          path: 'optionalRegistration',
+          pageBuilder: (context, state) => slideTransitionRL(
+            const OptionalStep(),
           ),
         ),
       ],

@@ -3,8 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:rechef_app/src/constants/image_path.dart';
 import 'package:rechef_app/src/constants/styles.dart';
-import 'package:rechef_app/src/ui/auth/widgets/oauth_button.dart';
-import 'package:rechef_app/src/ui/auth/widgets/shrink_button.dart';
+import 'package:rechef_app/src/presentation/auth/register/widgets/oauth_button.dart';
+import 'package:rechef_app/src/presentation/auth/widgets/shrink_button.dart';
+import 'package:rechef_app/src/routes/routes/app_router.dart';
 
 import 'widgets/dialogs.dart';
 import 'widgets/text_input.dart';
@@ -73,10 +74,10 @@ class _LoginScreenState extends State<LoginScreen> {
                     const Padding(padding: EdgeInsets.all(4)),
                     Container(
                       decoration: BoxDecoration(
-                        border: Border.all(
-                          color: Styles.color.primary,
-                          width: 1,
-                        ),
+                        // border: Border.all(
+                        //   color: Styles.color.primary,
+                        //   width: 1,
+                        // ),
                         color: Colors.white,
                         borderRadius: BorderRadius.circular(10),
                       ),
@@ -122,7 +123,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                 ),
                                 InkWell(
                                   onTap: () {
-                                    context.push('/auth/register');
+                                    router.push('/auth/register');
                                   },
                                   child: Text(
                                     'Daftar',

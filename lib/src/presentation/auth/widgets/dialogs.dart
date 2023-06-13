@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:rechef_app/src/routes/routes/app_router.dart';
 
 import '../../../constants/styles.dart';
 
@@ -55,8 +56,8 @@ class CancelRegisDialog extends StatelessWidget {
       actions: [
         TextButton(
           onPressed: () {
-            context.pop();
-            context.pop();
+            router.pop();
+            router.pop();
           },
           child: Text(
             "Ya",
@@ -65,7 +66,7 @@ class CancelRegisDialog extends StatelessWidget {
         ),
         TextButton(
           onPressed: () {
-            Navigator.of(context).pop();
+            router.pop();
           },
           child: Text(
             "Tidak",

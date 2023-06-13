@@ -14,9 +14,17 @@ class SplashScreen extends StatefulWidget {
 
 class _SplashScreenState extends State<SplashScreen> {
   @override
-  Widget build(BuildContext context) {
-    Timer(const Duration(seconds: 3),
-        () => context.pushReplacement('/auth/login'));
+  void dispose() {
+    // TODO: implement dispose
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext ctx) {
+    Timer(
+      const Duration(seconds: 3),
+      () => router.pushReplacement('/auth/login'),
+    );
     return Scaffold(
       body: Center(
         child: Text(

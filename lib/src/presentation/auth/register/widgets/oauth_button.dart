@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../../constants/styles.dart';
+import '../../../../constants/styles.dart';
 
 class OAuthButton extends StatelessWidget {
   const OAuthButton({super.key, required this.asset});

@@ -37,7 +37,7 @@ class _TextInputState extends State<TextInput> {
         ),
         SizedBox(
           child: TextFormField(
-            style: Styles.font.bold,
+            style: Styles.font.bold.copyWith(fontWeight: FontWeight.w500),
             textAlignVertical: TextAlignVertical.center,
             obscureText: widget.label.contains('Sandi') ? _isObsecure : false,
             validator: widget.validator,
