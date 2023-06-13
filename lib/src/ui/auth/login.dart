@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
@@ -8,6 +6,7 @@ import 'package:rechef_app/src/constants/styles.dart';
 import 'package:rechef_app/src/ui/auth/widgets/oauth_button.dart';
 import 'package:rechef_app/src/ui/auth/widgets/shrink_button.dart';
 
+import 'widgets/dialogs.dart';
 import 'widgets/text_input.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -45,32 +44,7 @@ class _LoginScreenState extends State<LoginScreen> {
           var curve = Curves.easeInOut.transform(animation.value);
           return Transform.scale(
             scale: curve,
-            child: AlertDialog(
-              title: const Center(child: Text('Keluar dari aplikasi?')),
-              actionsAlignment: MainAxisAlignment.center,
-              actions: [
-                TextButton(
-                  onPressed: () {
-                    Navigator.of(context).pop();
-                    exit(0);
-                  },
-                  child: Text(
-                    "Ya",
-                    style:
-                        Styles.font.bold.copyWith(color: Styles.color.danger),
-                  ),
-                ),
-                TextButton(
-                  onPressed: () {
-                    Navigator.of(context).pop();
-                  },
-                  child: Text(
-                    "Tidak",
-                    style: Styles.font.bold,
-                  ),
-                ),
-              ],
-            ),
+            child: const ExitAppDialog(),
           );
         },
       );
@@ -78,7 +52,7 @@ class _LoginScreenState extends State<LoginScreen> {
     }
 
     return GestureDetector(
-      onTap: () => FocusScope.of(context).unfocus(),
+      onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
       child: WillPopScope(
         onWillPop: () => _doPop(),
         child: Scaffold(
@@ -125,9 +99,6 @@ class _LoginScreenState extends State<LoginScreen> {
                               },
                               textController: _emailController,
                             ),
-                            const SizedBox(
-                              height: 10,
-                            ),
                             TextInput(
                               label: 'Kata Sandi',
                               hint: '******',
@@ -140,7 +111,7 @@ class _LoginScreenState extends State<LoginScreen> {
                               textController: _passwordController,
                             ),
                             const SizedBox(
-                              height: 15,
+                              height: 5,
                             ),
                             Row(
                               mainAxisAlignment: MainAxisAlignment.end,
@@ -192,7 +163,8 @@ class _LoginScreenState extends State<LoginScreen> {
                               child: ShrinkButton(
                                   text: 'Masuk',
                                   onTap: () {
-                                    FocusScope.of(context).unfocus();
+                                    FocusManager.instance.primaryFocus
+                                        ?.unfocus();
                                     _submit();
                                   }),
                             ),

@@ -41,8 +41,12 @@ class _TextInputState extends State<TextInput> {
             textAlignVertical: TextAlignVertical.center,
             obscureText: widget.label.contains('Sandi') ? _isObsecure : false,
             validator: widget.validator,
+            onChanged: (value) => widget.textController.text = value,
             decoration: Styles.input.accent.copyWith(
-              contentPadding: const EdgeInsets.all(10),
+              contentPadding: EdgeInsets.symmetric(
+                vertical: widget.label.contains('Sandi') ? 10 : 15,
+                horizontal: 10,
+              ),
               hintText: widget.hint,
               focusedBorder: OutlineInputBorder(
                 borderSide: BorderSide(
@@ -77,6 +81,9 @@ class _TextInputState extends State<TextInput> {
             ),
           ),
         ),
+        const SizedBox(
+          height: 10,
+        )
       ],
     );
   }
