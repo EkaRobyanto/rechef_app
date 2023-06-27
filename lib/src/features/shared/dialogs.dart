@@ -1,10 +1,9 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
-import 'package:rechef_app/src/routes/routes/app_router.dart';
+import 'package:rechef_app/src/routes/app_router.dart';
 
-import '../../../constants/styles.dart';
+import '../../constants/styles.dart';
 
 class ExitAppDialog extends StatelessWidget {
   const ExitAppDialog({
@@ -73,6 +72,33 @@ class CancelRegisDialog extends StatelessWidget {
             style: Styles.font.bold,
           ),
         ),
+      ],
+    );
+  }
+}
+
+class ErrorDialog extends StatelessWidget {
+  const ErrorDialog({super.key, required this.error});
+
+  final String error;
+
+  @override
+  Widget build(BuildContext context) {
+    return AlertDialog(
+      title: Text(
+        'Terjadi Kesalahan',
+        style: Styles.font.bold,
+      ),
+      content: Text(error),
+      actions: [
+        InkWell(
+          child: Text(
+            'Ok',
+            style: Styles.font.bsm.copyWith(
+              color: Styles.color.primary,
+            ),
+          ),
+        )
       ],
     );
   }

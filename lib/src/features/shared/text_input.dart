@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-
-import '../../../constants/styles.dart';
+import '../../constants/styles.dart';
 
 class TextInput extends StatefulWidget {
   TextInput({

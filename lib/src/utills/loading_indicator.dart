@@ -23,3 +23,16 @@ class LoadingIndicator {
     Navigator.of(context).pop();
   }
 }
+
+class LoadingIndicatorWidget extends StatelessWidget {
+  const LoadingIndicatorWidget({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Center(
+      child: SpinKitChasingDots(
+        color: Styles.color.primary,
+      ),
+    );
+  }
+}

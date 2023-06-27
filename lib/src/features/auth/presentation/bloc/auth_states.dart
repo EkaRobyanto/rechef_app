@@ -32,8 +32,3 @@ class AuthError extends AuthState {
   @override
   List<Object?> get props => [error];
 }
-
-class AuthAborted extends AuthState {
-  @override
-  List<Object?> get props => [];
-}
