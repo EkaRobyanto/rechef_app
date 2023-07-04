@@ -1,17 +1,13 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:rechef_app/src/features/auth/presentation/register/register_steps/cubit/select_gender_cubit.dart';
-import 'package:rechef_app/src/features/shared/shrink_button.dart';
+import 'package:rechef_app/src/shared/shrink_button.dart';
 
 import '../../../../../constants/image_path.dart';
 import '../../../../../constants/styles.dart';
 import 'widgets/select_gender.dart';
 
 class ChooseGender extends StatelessWidget {
-  const ChooseGender({super.key, required this.onBack});
-  final VoidCallback onBack;
+  const ChooseGender({super.key, required this.onCallBack});
+  final VoidCallback onCallBack;
 
   @override
   Widget build(BuildContext context) {
@@ -44,11 +40,7 @@ class ChooseGender extends StatelessWidget {
               child: ShrinkButton(
                 text: 'Selanjutnya',
                 onTap: () {
-                  var value = context.read<GenderCubit>().state;
-                  log(value);
-                  if (value != '') {
-                    onBack();
-                  }
+                  onCallBack();
                 },
               ),
             )

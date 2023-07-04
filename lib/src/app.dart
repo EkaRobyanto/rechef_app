@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:rechef_app/src/features/auth/presentation/register/register_steps/cubit/select_gender_cubit.dart';
-import 'package:rechef_app/src/features/auth/repository/auth_repository_impl.dart';
+import 'package:rechef_app/src/core/auth/repository/auth_repository_impl.dart';
+import 'package:rechef_app/src/core/connectivity_check/bloc/connectivity_cubit.dart';
+import 'package:rechef_app/src/core/connectivity_check/repository/connectivity_repository.dart';
 import 'package:rechef_app/src/routes/app_router.dart';
 
-import 'features/auth/presentation/bloc/auth_bloc.dart';
+import 'core/auth/bloc/auth_bloc.dart';
+import 'features/home/repository/home_repository_impl.dart';
 
 class App extends StatelessWidget {
   const App({super.key});
@@ -16,13 +18,23 @@ class App extends StatelessWidget {
         RepositoryProvider(
           create: (ctx) => AuthRepositoryImpl(),
         ),
+        RepositoryProvider(
+          create: (context) => ConnectivityRepository(),
+        ),
+        RepositoryProvider(
+          create: (ctx) => HomeRepositoryImpl(),
+        ),
       ],
       child: MultiBlocProvider(
         providers: [
           BlocProvider(
             create: (context) => AuthBloc(
-              authRepository:
-                  RepositoryProvider.of<AuthRepositoryImpl>(context),
+              authRepo: context.read<AuthRepositoryImpl>(),
+            ),
+          ),
+          BlocProvider(
+            create: (context) => ConnectivityCubit(
+              connectRepo: context.read<ConnectivityRepository>(),
             ),
           ),
         ],
