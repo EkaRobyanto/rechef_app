@@ -5,6 +5,7 @@ import 'package:rechef_app/src/core/auth/bloc/auth_bloc.dart';
 import 'package:rechef_app/src/core/auth/bloc/auth_event.dart';
 import 'package:rechef_app/src/core/auth/bloc/auth_states.dart';
 import 'package:rechef_app/src/features/auth/presentation/register/bloc/register_bloc.dart';
+import 'package:rechef_app/src/features/home/presentation/category_list.dart';
 import 'package:rechef_app/src/features/home/presentation/home.dart';
 import 'package:rechef_app/src/routes/bottom_navbar.dart';
 
@@ -45,11 +46,25 @@ CustomTransitionPage<dynamic> slideTransitionBT(page) {
   );
 }
 
+CustomTransitionPage<dynamic> fadeTransition(page) {
+  return CustomTransitionPage(
+    child: page,
+    transitionsBuilder: (context, animation, secondaryAnimation, child) {
+      return FadeTransition(
+        opacity: CurveTween(curve: Curves.easeInOut).animate(animation),
+        child: child,
+      );
+    },
+  );
+}
+
+final _rootNavigatorKey = GlobalKey<NavigatorState>();
 final _shellNavigatorKey = GlobalKey<NavigatorState>();
 
 final GoRouter router = GoRouter(
   initialLocation: '/auth',
   debugLogDiagnostics: true,
+  navigatorKey: _rootNavigatorKey,
   routes: [
     GoRoute(
       path: '/auth',
@@ -69,12 +84,14 @@ final GoRouter router = GoRouter(
     GoRoute(
       path: '/login',
       name: 'login',
+      parentNavigatorKey: _rootNavigatorKey,
       pageBuilder: (context, state) => slideTransitionRL(
         const LoginScreen(),
       ),
     ),
     GoRoute(
       path: '/register',
+      parentNavigatorKey: _rootNavigatorKey,
       name: 'register',
       pageBuilder: (context, state) => slideTransitionBT(
         const Register(),
@@ -103,6 +120,27 @@ final GoRouter router = GoRouter(
           pageBuilder: (context, state) => const NoTransitionPage(
             child: Home(),
           ),
+          routes: [
+            GoRoute(
+              path: 'category-list',
+              name: 'kategori',
+              parentNavigatorKey: _rootNavigatorKey,
+              pageBuilder: (context, state) =>
+                  slideTransitionRL(const CategoryList()),
+            ),
+            GoRoute(
+              path: 'search',
+              name: 'search',
+              parentNavigatorKey: _rootNavigatorKey,
+              pageBuilder: (context, state) => fadeTransition(
+                Scaffold(
+                  body: Center(
+                    child: Text('ini search'),
+                  ),
+                ),
+              ),
+            ),
+          ],
         ),
         GoRoute(
           path: '/feed',

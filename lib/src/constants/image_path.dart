@@ -11,6 +11,7 @@ String genderMale = 'man'.png;
 String genderFemale = 'woman'.png;
 String registStepCompleted = 'regist_step_completed'.png;
 String bg = 'bg'.png;
+String noConnection = 'no-connection'.png;
 
 //interest
 String bakery = 'bakery'.png;
@@ -26,4 +27,16 @@ String pasta = 'pasta'.png;
 String indian = 'shawarma'.png;
 String japanese = 'sushi'.png;
 String vegan = 'vegetable'.png;
-
+String buah = 'buah'.png;
+String cino = 'chinese'.png;
+String daging = 'daging'.png;
+String korean = 'korean'.png;
+String minuman = 'minuman'.png;
+String nasi = 'nasi'.png;
+String timurTengah = 'samosa'.png;
+String saus = 'saus'.png;
+String thai = 'thai'.png;
+String tumis = 'tumis'.png;
+String western = 'western'.png;
+String susu = 'susu'.png;
+String snack = 'snack'.png;

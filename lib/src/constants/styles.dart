@@ -17,9 +17,11 @@ class Styles {
 
 class _Color {
   Color get primary => const Color(0xFF5FD068);
+  Color get darkGreen => const Color(0xFF4B8673);
   Color get accent => const Color(0xFFF5DF99);
   Color get danger => const Color(0xFFFD312E);
   Color get hint => Colors.black.withOpacity(0.3);
+  Color get dark => const Color(0xFF263238);
 }
 
 class _Font {
