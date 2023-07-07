@@ -10,24 +10,28 @@ class ErrorScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Text(
-            error,
-            style: Styles.font.bxl,
-          ),
-          const SizedBox(
-            height: 20,
-          ),
-          IconButton(
-            onPressed: onRetry,
-            icon: Icon(
-              Icons.restart_alt_outlined,
-              color: Styles.color.primary,
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Text(
+              error,
+              style: Styles.font.bxl,
             ),
-          )
-        ],
+            const SizedBox(
+              height: 20,
+            ),
+            InkWell(
+              onTap: onRetry,
+              child: Icon(
+                Icons.restart_alt_outlined,
+                color: Styles.color.primary,
+                size: 100,
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }

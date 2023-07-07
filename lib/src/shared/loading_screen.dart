@@ -9,17 +9,15 @@ class LoadingScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Lottie.asset(loading),
-          Text(
-            'Mohon Tunggu Sebentar...',
-            style: Styles.font.bold,
-          ),
-        ],
-      ),
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        Lottie.asset(loading),
+        Text(
+          'Mohon Tunggu Sebentar...',
+          style: Styles.font.bold,
+        ),
+      ],
     );
   }
 }

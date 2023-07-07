@@ -5,6 +5,7 @@ import 'package:rechef_app/src/core/auth/bloc/auth_bloc.dart';
 import 'package:rechef_app/src/core/auth/bloc/auth_event.dart';
 import 'package:rechef_app/src/core/auth/bloc/auth_states.dart';
 import 'package:rechef_app/src/features/auth/presentation/register/bloc/register_bloc.dart';
+import 'package:rechef_app/src/features/feed/presentation/feed.dart';
 import 'package:rechef_app/src/features/home/presentation/category_list.dart';
 import 'package:rechef_app/src/features/home/presentation/home.dart';
 import 'package:rechef_app/src/routes/bottom_navbar.dart';
@@ -133,7 +134,7 @@ final GoRouter router = GoRouter(
               name: 'search',
               parentNavigatorKey: _rootNavigatorKey,
               pageBuilder: (context, state) => fadeTransition(
-                Scaffold(
+                const Scaffold(
                   body: Center(
                     child: Text('ini search'),
                   ),
@@ -146,9 +147,7 @@ final GoRouter router = GoRouter(
           path: '/feed',
           name: 'feed',
           pageBuilder: (context, state) => const NoTransitionPage(
-            child: Scaffold(
-              body: Center(child: Text('feed')),
-            ),
+            child: Feed(),
           ),
         ),
         GoRoute(
