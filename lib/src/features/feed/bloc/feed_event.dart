@@ -7,5 +7,5 @@ class LoadFeed extends FeedEvent {
   LoadFeed(this.token, this.category);
 
   @override
-  List<Object?> get props => [category];
+  List<Object?> get props => [token, category];
 }

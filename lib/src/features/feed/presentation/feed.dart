@@ -92,14 +92,16 @@ class _FeedState extends State<Feed> with SingleTickerProviderStateMixin {
                       onRetry: () {},
                     );
                   } else {
-                    return ListView.builder(
-                      itemCount: 3,
-                      shrinkWrap: true,
-                      padding: const EdgeInsets.symmetric(
-                          vertical: 20, horizontal: 10),
-                      itemBuilder: (context, index) {
-                        return const RecipeCard();
-                      },
+                    return Expanded(
+                      child: ListView.builder(
+                        itemCount: 10,
+                        shrinkWrap: true,
+                        padding: const EdgeInsets.symmetric(
+                            vertical: 20, horizontal: 10),
+                        itemBuilder: (context, index) {
+                          return const RecipeCard();
+                        },
+                      ),
                     );
                   }
                 },

@@ -12,6 +12,7 @@ class FeedBloc extends Bloc<FeedEvent, FeedState> {
   FeedBloc({required this.feedRepo}) : super(FeedLoading()) {
     on<LoadFeed>(
       (event, emit) async {
+        log(event.category);
         emit(FeedLoading());
         try {
           var connection = await checkConnection();

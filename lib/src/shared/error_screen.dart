@@ -18,6 +18,7 @@ class ErrorScreen extends StatelessWidget {
             Text(
               error,
               style: Styles.font.bxl,
+              textAlign: TextAlign.center,
             ),
             const SizedBox(
               height: 20,

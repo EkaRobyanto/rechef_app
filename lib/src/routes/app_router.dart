@@ -4,6 +4,7 @@ import 'package:go_router/go_router.dart';
 import 'package:rechef_app/src/core/auth/bloc/auth_bloc.dart';
 import 'package:rechef_app/src/core/auth/bloc/auth_event.dart';
 import 'package:rechef_app/src/core/auth/bloc/auth_states.dart';
+import 'package:rechef_app/src/features/account/presentation/favorite.dart';
 import 'package:rechef_app/src/features/auth/presentation/register/bloc/register_bloc.dart';
 import 'package:rechef_app/src/features/feed/presentation/feed.dart';
 import 'package:rechef_app/src/features/home/presentation/category_list.dart';
@@ -154,9 +155,7 @@ final GoRouter router = GoRouter(
           path: '/favorite',
           name: 'favorite',
           pageBuilder: (context, state) => const NoTransitionPage(
-            child: Scaffold(
-              body: Center(child: Text('fav')),
-            ),
+            child: Favorite(),
           ),
         ),
         GoRoute(
