@@ -4,7 +4,8 @@ import 'package:go_router/go_router.dart';
 import 'package:rechef_app/src/core/auth/bloc/auth_bloc.dart';
 import 'package:rechef_app/src/core/auth/bloc/auth_event.dart';
 import 'package:rechef_app/src/core/auth/bloc/auth_states.dart';
-import 'package:rechef_app/src/features/account/presentation/favorite.dart';
+import 'package:rechef_app/src/features/account/presentation/account/account.dart';
+import 'package:rechef_app/src/features/account/presentation/favorite/favorite.dart';
 import 'package:rechef_app/src/features/auth/presentation/register/bloc/register_bloc.dart';
 import 'package:rechef_app/src/features/feed/presentation/feed.dart';
 import 'package:rechef_app/src/features/home/presentation/category_list.dart';
@@ -161,13 +162,22 @@ final GoRouter router = GoRouter(
         GoRoute(
           path: '/account',
           name: 'account',
-          pageBuilder: (context, state) => const NoTransitionPage(
-            child: Scaffold(
-              body: Center(child: Text('akun')),
-            ),
-          ),
+          pageBuilder: (context, state) =>
+              const NoTransitionPage(child: Account()),
         ),
       ],
+    ),
+    GoRoute(
+      path: '/create-recipe',
+      name: 'create-recipe',
+      parentNavigatorKey: _rootNavigatorKey,
+      pageBuilder: (context, state) => slideTransitionBT(
+        const Scaffold(
+          body: Center(
+            child: Text('ini create recipe'),
+          ),
+        ),
+      ),
     ),
   ],
 );

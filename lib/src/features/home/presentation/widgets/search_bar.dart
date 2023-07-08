@@ -3,9 +3,7 @@ import 'package:flutter/material.dart';
 import '../../../../constants/styles.dart';
 
 class SearchBar extends StatelessWidget {
-  final double scrollOffset;
-
-  const SearchBar({super.key, required this.scrollOffset});
+  const SearchBar({super.key});
 
   @override
   Widget build(BuildContext context) {

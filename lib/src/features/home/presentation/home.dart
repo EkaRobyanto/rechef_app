@@ -246,9 +246,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 left: 20,
                 right: 20,
               ),
-              child: SearchBar(
-                scrollOffset: _scrollControllerOffset,
-              ),
+              child: const SearchBar(),
             ),
           ),
         ],

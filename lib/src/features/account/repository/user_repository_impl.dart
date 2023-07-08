@@ -6,4 +6,10 @@ class UserRepositoryImpl extends UserRepository {
     await Future.delayed(const Duration(seconds: 2));
     return Future.value([]);
   }
+
+  @override
+  Future getAccount(String token) async {
+    await Future.delayed(const Duration(seconds: 2));
+    return Future.value('');
+  }
 }

@@ -91,7 +91,7 @@ class _FeedState extends State<Feed> with SingleTickerProviderStateMixin {
                       error: state.error,
                       onRetry: () {},
                     );
-                  } else {
+                  } else if (state is FeedLoaded) {
                     return Expanded(
                       child: ListView.builder(
                         itemCount: 10,
@@ -103,6 +103,8 @@ class _FeedState extends State<Feed> with SingleTickerProviderStateMixin {
                         },
                       ),
                     );
+                  } else {
+                    return const SizedBox();
                   }
                 },
               )

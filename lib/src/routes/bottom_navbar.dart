@@ -67,7 +67,9 @@ class _MainScaffoldState extends State<MainScaffold> {
       child: Scaffold(
         body: widget.child,
         floatingActionButton: FloatingActionButton(
-          onPressed: () {},
+          onPressed: () {
+            context.pushNamed('create-recipe');
+          },
           backgroundColor: Styles.color.primary,
           elevation: 0,
           child: const Center(
