@@ -1,12 +1,11 @@
-import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:rechef_app/src/core/auth/repository/auth_repository_impl.dart';
-import 'package:rechef_app/src/routes/app_router.dart';
-
-import 'core/auth/bloc/auth_bloc.dart';
+import 'features/recipe/repository/recipe_repository_impl.dart';
 import 'features/account/repository/user_repository_impl.dart';
-import 'features/feed/repository/feed_repository_impl.dart';
 import 'features/home/repository/home_repository_impl.dart';
+import 'core/auth/repository/auth_repository_impl.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'core/auth/bloc/auth_bloc.dart';
+import 'package:flutter/material.dart';
+import 'routes/app_router.dart';
 
 class App extends StatelessWidget {
   const App({super.key});
@@ -22,7 +21,7 @@ class App extends StatelessWidget {
           create: (ctx) => HomeRepositoryImpl(),
         ),
         RepositoryProvider(
-          create: (ctx) => FeedRepositoryImpl(),
+          create: (ctx) => RecipeRepositoryImpl(),
         ),
         RepositoryProvider(
           create: (ctx) => UserRepositoryImpl(),

@@ -4,5 +4,7 @@ abstract class AuthRepositoryInterface {
   Future<void> login(Map<String, dynamic> data);
   Future<void> register(UserRegist data);
   Future<bool> checkAuthentication();
+  Future<String> refreshToken();
+  Future<String> getToken();
   Future<void> signOut();
 }

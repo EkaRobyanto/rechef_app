@@ -13,12 +13,15 @@ class AccountBody extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       width: MediaQuery.of(context).size.width,
+      height: MediaQuery.of(context).size.height,
       padding: const EdgeInsets.all(10),
-      decoration: const BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.only(
-            topLeft: Radius.circular(20), topRight: Radius.circular(20)),
-      ),
+      decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: const BorderRadius.only(
+            topLeft: Radius.circular(20),
+            topRight: Radius.circular(20),
+          ),
+          border: Border.all(color: Styles.color.primary, width: 1)),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
@@ -39,12 +42,12 @@ class AccountBody extends StatelessWidget {
             height: 10,
           ),
           SizedBox(
-            width: double.infinity,
+            height: MediaQuery.of(context).size.height,
             child: ListView.builder(
               padding: const EdgeInsets.symmetric(horizontal: 10),
-              itemCount: 10,
+              itemCount: 1,
               shrinkWrap: true,
-              physics: const NeverScrollableScrollPhysics(),
+              // physics: const NeverScrollableScrollPhysics(),
               itemBuilder: (context, index) {
                 return const RecipeCard();
               },

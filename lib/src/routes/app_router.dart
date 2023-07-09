@@ -7,9 +7,10 @@ import 'package:rechef_app/src/core/auth/bloc/auth_states.dart';
 import 'package:rechef_app/src/features/account/presentation/account/account.dart';
 import 'package:rechef_app/src/features/account/presentation/favorite/favorite.dart';
 import 'package:rechef_app/src/features/auth/presentation/register/bloc/register_bloc.dart';
-import 'package:rechef_app/src/features/feed/presentation/feed.dart';
+import 'package:rechef_app/src/features/recipe/presentation/feed/feed.dart';
 import 'package:rechef_app/src/features/home/presentation/category_list.dart';
 import 'package:rechef_app/src/features/home/presentation/home.dart';
+import 'package:rechef_app/src/features/recipe/presentation/view%20recipe/view_recipe.dart';
 import 'package:rechef_app/src/routes/bottom_navbar.dart';
 
 import '../features/auth/presentation/register/register_steps/register_step.dart';
@@ -177,6 +178,14 @@ final GoRouter router = GoRouter(
             child: Text('ini create recipe'),
           ),
         ),
+      ),
+    ),
+    GoRoute(
+      path: '/view-recipe',
+      name: 'view-recipe',
+      parentNavigatorKey: _rootNavigatorKey,
+      pageBuilder: (context, state) => slideTransitionRL(
+        const ViewRecipe(),
       ),
     ),
   ],

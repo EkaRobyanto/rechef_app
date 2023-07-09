@@ -36,4 +36,16 @@ class AuthRepositoryImpl extends AuthRepositoryInterface {
   Future<void> signOut() async {
     try {} catch (e) {}
   }
+
+  @override
+  Future<String> getToken() async {
+    await Future.delayed(const Duration(seconds: 2));
+    return '';
+  }
+
+  @override
+  Future<String> refreshToken() async {
+    await Future.delayed(const Duration(seconds: 2));
+    return '';
+  }
 }

@@ -2,15 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:rechef_app/src/constants/styles.dart';
-import 'package:rechef_app/src/features/feed/bloc/feed_event.dart';
-import 'package:rechef_app/src/features/feed/repository/feed_repository_impl.dart';
 import 'package:rechef_app/src/shared/error_screen.dart';
 import 'package:rechef_app/src/shared/loading_screen.dart';
 import 'package:rechef_app/src/shared/recipe_card.dart';
 
-import '../../../utills/material_design_indicator.dart';
-import '../bloc/feed_bloc.dart';
-import '../bloc/feed_state.dart';
+import '../../blocs/feed/feed_bloc.dart';
+import '../../blocs/feed/feed_event.dart';
+import '../../blocs/feed/feed_state.dart';
+import '../../repository/recipe_repository_impl.dart';
+import '../../../../utills/material_design_indicator.dart';
 
 class Feed extends StatefulWidget {
   const Feed({super.key});
@@ -47,12 +47,13 @@ class _FeedState extends State<Feed> with SingleTickerProviderStateMixin {
     return Scaffold(
       body: BlocProvider(
         create: (context) => FeedBloc(
-          feedRepo: RepositoryProvider.of<FeedRepositoryImpl>(context),
+          recipeRepo: RepositoryProvider.of<RecipeRepositoryImpl>(context),
         )..add(
             LoadFeed('', ''),
           ),
         child: SafeArea(
           child: Column(
+            mainAxisSize: MainAxisSize.min,
             children: [
               BlocBuilder<FeedBloc, FeedState>(
                 builder: (context, state) {
@@ -70,7 +71,6 @@ class _FeedState extends State<Feed> with SingleTickerProviderStateMixin {
                       BlocProvider.of<FeedBloc>(context, listen: false).add(
                         LoadFeed('', _tabs[index]),
                       );
-                      // context.read<FeedBloc>().add(LoadFeed('', _tabs[index]));
                     },
                     tabs: _tabs
                         .map(

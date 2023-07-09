@@ -1,15 +1,16 @@
 import 'package:flutter/material.dart';
-import 'package:boxicons/boxicons.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:rechef_app/src/constants/styles.dart';
-import 'package:rechef_app/src/features/account/blocs/account/account_cubit.dart';
-import 'package:rechef_app/src/features/account/blocs/account/account_state.dart';
-import 'package:rechef_app/src/features/account/repository/user_repository_impl.dart';
-import 'package:rechef_app/src/shared/error_screen.dart';
-import 'package:rechef_app/src/shared/loading_screen.dart';
 
-import 'widgets/account_body.dart';
+import '../../../../constants/styles.dart';
+import '../../../../shared/circle_net_pic.dart';
+import '../../../../shared/error_screen.dart';
+import '../../../../shared/loading_screen.dart';
+import '../../../../shared/recipe_card.dart';
+import '../../blocs/account/account_cubit.dart';
+import '../../blocs/account/account_state.dart';
+import '../../repository/user_repository_impl.dart';
 import 'widgets/account_header.dart';
+import 'widgets/body_header.dart';
 
 class Account extends StatelessWidget {
   const Account({super.key});
@@ -80,7 +81,7 @@ class _AccountCustomScrollState extends State<AccountCustomScroll> {
   Widget build(BuildContext context) {
     return Scaffold(
       extendBodyBehindAppBar: true,
-      backgroundColor: Styles.color.primary,
+      backgroundColor: Colors.white,
       body: CustomScrollView(
         controller: _scrollController,
         slivers: [
@@ -121,21 +122,7 @@ class _AccountCustomScrollState extends State<AccountCustomScroll> {
                         color: Colors.black,
                         borderRadius: BorderRadius.circular(100),
                       ),
-                      child: ClipRRect(
-                        borderRadius: BorderRadius.circular(100),
-                        child: Image.network(
-                          'https://picsum.photos/200',
-                          fit: BoxFit.fill,
-                          loadingBuilder: (context, child, loadingProgress) =>
-                              loadingProgress == null
-                                  ? child
-                                  : Center(
-                                      child: CircularProgressIndicator(
-                                        color: Styles.color.accent,
-                                      ),
-                                    ),
-                        ),
-                      ),
+                      child: const CircleNetPic(),
                     ),
                     const SizedBox(
                       width: 10,
@@ -181,53 +168,20 @@ class _AccountCustomScrollState extends State<AccountCustomScroll> {
               )
             ],
           ),
-          const SliverToBoxAdapter(
-            child: AccountBody(),
+          SliverPersistentHeader(
+            delegate: BodyHeader(),
+            pinned: true,
           ),
+          SliverList(
+            delegate: SliverChildBuilderDelegate(
+              childCount: 10,
+              (context, index) {
+                return const RecipeCard();
+              },
+            ),
+          )
         ],
       ),
     );
-  }
-}
-
-class Delegate extends SliverPersistentHeaderDelegate {
-  @override
-  Widget build(
-      BuildContext context, double shrinkOffset, bool overlapsContent) {
-    return Container(
-      width: MediaQuery.of(context).size.width,
-      padding: const EdgeInsets.all(10),
-      decoration: const BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.only(
-          topLeft: Radius.circular(20),
-          topRight: Radius.circular(20),
-        ),
-      ),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          const Icon(Boxicons.bx_book_alt),
-          const SizedBox(
-            width: 5,
-          ),
-          Text(
-            'Resep Saya',
-            style: Styles.font.bsm,
-          ),
-        ],
-      ),
-    );
-  }
-
-  @override
-  double get maxExtent => 200;
-
-  @override
-  double get minExtent => 200;
-
-  @override
-  bool shouldRebuild(covariant SliverPersistentHeaderDelegate oldDelegate) {
-    return false;
   }
 }
