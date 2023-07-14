@@ -28,6 +28,7 @@ class RecipeCreatorCard extends StatelessWidget {
       ),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           Row(
             children: [
@@ -83,8 +84,14 @@ class RecipeCreatorCard extends StatelessWidget {
                   ),
                 ],
               ),
-              const FollowButton(),
             ],
+          ),
+          ConstrainedBox(
+            constraints: const BoxConstraints.tightFor(
+              width: 100,
+              height: 35,
+            ),
+            child: const FollowButton(),
           ),
         ],
       ),

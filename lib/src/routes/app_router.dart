@@ -5,7 +5,7 @@ import 'package:rechef_app/src/core/auth/bloc/auth_bloc.dart';
 import 'package:rechef_app/src/core/auth/bloc/auth_event.dart';
 import 'package:rechef_app/src/core/auth/bloc/auth_states.dart';
 import 'package:rechef_app/src/features/account/presentation/account/account.dart';
-import 'package:rechef_app/src/features/account/presentation/favorite/favorite.dart';
+import 'package:rechef_app/src/features/recipe/presentation/favorite/favorite.dart';
 import 'package:rechef_app/src/features/auth/presentation/register/bloc/register_bloc.dart';
 import 'package:rechef_app/src/features/recipe/presentation/feed/feed.dart';
 import 'package:rechef_app/src/features/home/presentation/category_list.dart';
@@ -17,6 +17,7 @@ import '../features/auth/presentation/register/register_steps/register_step.dart
 import '../features/auth/presentation/register/register.dart';
 import '../features/auth/presentation/login/login.dart';
 import '../features/auth/presentation/splash_screen.dart';
+import '../features/recipe/presentation/create-recipe/create_recipe.dart';
 
 CustomTransitionPage<dynamic> slideTransitionRL(page) {
   return CustomTransitionPage(
@@ -173,11 +174,7 @@ final GoRouter router = GoRouter(
       name: 'create-recipe',
       parentNavigatorKey: _rootNavigatorKey,
       pageBuilder: (context, state) => slideTransitionBT(
-        const Scaffold(
-          body: Center(
-            child: Text('ini create recipe'),
-          ),
-        ),
+        const CreateRecipe(),
       ),
     ),
     GoRoute(

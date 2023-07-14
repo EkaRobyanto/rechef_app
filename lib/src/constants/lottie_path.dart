@@ -3,3 +3,4 @@ extension StringExtension on String {
 }
 
 String loading = 'loading'.json;
+String like = 'like'.json;

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../constants/styles.dart';
+
 class SliverHeader extends SliverPersistentHeaderDelegate {
   Widget content;
   SliverHeader({required this.content});
@@ -9,6 +11,11 @@ class SliverHeader extends SliverPersistentHeaderDelegate {
     return Align(
       child: Stack(
         children: [
+          Container(
+            height: 40,
+            width: MediaQuery.of(context).size.width,
+            color: Styles.color.primary,
+          ),
           Container(
             width: MediaQuery.of(context).size.width,
             padding: const EdgeInsets.all(10),

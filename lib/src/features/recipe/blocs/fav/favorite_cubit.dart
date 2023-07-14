@@ -1,7 +1,7 @@
 import 'dart:developer';
 
 import 'package:bloc/bloc.dart';
-import 'package:rechef_app/src/features/account/blocs/fav/favorite_state.dart';
+import 'package:rechef_app/src/features/recipe/blocs/fav/favorite_state.dart';
 import 'package:rechef_app/src/features/account/repository/user_repository_impl.dart';
 
 class FavCubit extends Cubit<FavoriteState> {
