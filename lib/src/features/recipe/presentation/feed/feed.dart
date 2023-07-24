@@ -6,11 +6,11 @@ import 'package:rechef_app/src/shared/error_screen.dart';
 import 'package:rechef_app/src/shared/loading_screen.dart';
 import 'package:rechef_app/src/shared/recipe_card.dart';
 
-import '../../blocs/feed/feed_bloc.dart';
-import '../../blocs/feed/feed_event.dart';
-import '../../blocs/feed/feed_state.dart';
 import '../../repository/recipe_repository_impl.dart';
 import '../../../../utills/material_design_indicator.dart';
+import 'bloc/feed_bloc.dart';
+import 'bloc/feed_event.dart';
+import 'bloc/feed_state.dart';
 
 class Feed extends StatefulWidget {
   const Feed({super.key});

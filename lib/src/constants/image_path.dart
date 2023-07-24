@@ -40,3 +40,11 @@ String tumis = 'tumis'.png;
 String western = 'western'.png;
 String susu = 'susu'.png;
 String snack = 'snack'.png;
+
+//ingredients category
+String bahanRoti = 'bahanroti'.png;
+String bebasSusu = 'bebassusu'.png;
+String gulaPemanis = 'gulapemanis'.png;
+String minyak = 'minyak'.png;
+String rempah = 'rempah'.png;
+String sayurBiji = 'sayurbiji'.png;

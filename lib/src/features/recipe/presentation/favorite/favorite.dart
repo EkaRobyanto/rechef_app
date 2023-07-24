@@ -2,12 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:rechef_app/src/constants/styles.dart';
 
-import 'package:rechef_app/src/features/recipe/blocs/fav/favorite_cubit.dart';
+import 'package:rechef_app/src/features/recipe/presentation/favorite/fav/favorite_cubit.dart';
 import 'package:rechef_app/src/shared/error_screen.dart';
 import 'package:rechef_app/src/shared/loading_screen.dart';
 
 import '../../../../shared/recipe_card.dart';
-import '../../blocs/fav/favorite_state.dart';
+import 'fav/favorite_state.dart';
 import '../../../account/repository/user_repository_impl.dart';
 
 class Favorite extends StatelessWidget {

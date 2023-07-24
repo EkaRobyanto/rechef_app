@@ -246,7 +246,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 left: 20,
                 right: 20,
               ),
-              child: const SearchBar(),
+              child: const MySearchBar(),
             ),
           ),
         ],

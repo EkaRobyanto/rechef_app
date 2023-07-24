@@ -1,18 +1,18 @@
 import 'package:flutter/material.dart';
 
 import '../../../../../constants/styles.dart';
-import 'ingredient_card.dart';
+import 'add_ingredients_tab.dart';
 
-class RecipeTabbar extends StatefulWidget {
-  const RecipeTabbar({
+class CreateRecipeTabBar extends StatefulWidget {
+  const CreateRecipeTabBar({
     super.key,
   });
 
   @override
-  State<RecipeTabbar> createState() => _RecipeTabbarState();
+  State<CreateRecipeTabBar> createState() => _CreateRecipeTabBar();
 }
 
-class _RecipeTabbarState extends State<RecipeTabbar>
+class _CreateRecipeTabBar extends State<CreateRecipeTabBar>
     with SingleTickerProviderStateMixin {
   late TabController _tabController;
 
@@ -52,12 +52,12 @@ class _RecipeTabbarState extends State<RecipeTabbar>
           indicatorWeight: 3,
         ),
         SizedBox(
-          height: MediaQuery.of(context).size.height * 0.8,
+          height: MediaQuery.of(context).size.height * 0.83,
           child: TabBarView(
             controller: _tabController,
-            children: [
-              IngredientsTab(),
-              MethodTab(),
+            children: const [
+              AddIngredients(),
+              AddMethod(),
             ],
           ),
         )
@@ -66,32 +66,15 @@ class _RecipeTabbarState extends State<RecipeTabbar>
   }
 }
 
-class MethodTab extends StatelessWidget {
-  const MethodTab({
+class AddMethod extends StatelessWidget {
+  const AddMethod({
     super.key,
   });
 
   @override
   Widget build(BuildContext context) {
     return Center(
-      child: Text('metode'),
-    );
-  }
-}
-
-class IngredientsTab extends StatelessWidget {
-  const IngredientsTab({
-    super.key,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return ListView.builder(
-      padding: const EdgeInsets.symmetric(vertical: 10),
-      shrinkWrap: true,
-      itemCount: 1,
-      physics: const BouncingScrollPhysics(),
-      itemBuilder: (context, index) => const IngredientCard(),
+      child: Text('methodTab()'),
     );
   }
 }
