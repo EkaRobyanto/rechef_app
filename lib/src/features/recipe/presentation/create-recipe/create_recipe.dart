@@ -19,10 +19,7 @@ class CreateRecipe extends StatelessWidget {
       onTap: () => FocusScope.of(context).unfocus(),
       child: Scaffold(
         floatingActionButton: FloatingActionButton(
-          onPressed: () {
-            // context.read<CreateRecipeCubit>().createRecipe();
-            // context.go('/recipe');
-          },
+          onPressed: () {},
           backgroundColor: Styles.color.primary,
           child: const Icon(
             Icons.arrow_forward,
@@ -47,9 +44,7 @@ class CreateRecipe extends StatelessWidget {
           child: BlocProvider(
             create: (context) => CreateRecipeCubit(),
             child: BlocListener<CreateRecipeCubit, CreateRecipeState>(
-              listener: (context, state) {
-                // TODO: implement listener
-              },
+              listener: (context, state) {},
               child: const SingleChildScrollView(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.center,

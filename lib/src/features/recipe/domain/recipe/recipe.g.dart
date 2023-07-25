@@ -17,6 +17,7 @@ _$_Recipe _$$_RecipeFromJson(Map<String, dynamic> json) => _$_Recipe(
       duration: json['duration'] as String?,
       portion: json['portion'] as int?,
       calories: json['calories'] as int?,
+      difficulty: json['difficulty'] as String?,
       isHiddenLike: json['is_hidden_like'] as bool?,
       isHiddenComment: json['is_hidden_comment'] as bool?,
       method: (json['method'] as List<dynamic>?)
@@ -38,6 +39,7 @@ Map<String, dynamic> _$$_RecipeToJson(_$_Recipe instance) => <String, dynamic>{
       'duration': instance.duration,
       'portion': instance.portion,
       'calories': instance.calories,
+      'difficulty': instance.difficulty,
       'is_hidden_like': instance.isHiddenLike,
       'is_hidden_comment': instance.isHiddenComment,
       'method': instance.method,

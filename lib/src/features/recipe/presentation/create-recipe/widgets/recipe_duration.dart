@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:icons_plus/icons_plus.dart';
 
 import '../../../../../constants/styles.dart';
+import '../cubit/create_recipe_cubit.dart';
 
 class RecipeDuration extends StatelessWidget {
   const RecipeDuration({
@@ -33,6 +35,11 @@ class RecipeDuration extends StatelessWidget {
               SizedBox(
                 width: 85,
                 child: TextFormField(
+                  onChanged: (value) {
+                    context
+                        .read<CreateRecipeCubit>()
+                        .updateRecipeInfo(duration: value);
+                  },
                   autocorrect: false,
                   textAlign: TextAlign.center,
                   minLines: 1,

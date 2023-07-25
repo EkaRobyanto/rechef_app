@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:icons_plus/icons_plus.dart';
 
 import '../../../../../constants/styles.dart';
+import '../cubit/create_recipe_cubit.dart';
 
 class RecipeDifficulty extends StatelessWidget {
   const RecipeDifficulty({
@@ -48,7 +50,11 @@ class RecipeDifficulty extends StatelessWidget {
                 child: Text('Profesional'),
               ),
             ],
-            onChanged: (value) {},
+            onChanged: (value) {
+              context
+                  .read<CreateRecipeCubit>()
+                  .updateRecipeInfo(difficulty: value);
+            },
           ),
         )
       ],

@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:icons_plus/icons_plus.dart';
 
 import '../../../../../constants/styles.dart';
+import '../cubit/create_recipe_cubit.dart';
 
 class RecipePortion extends StatelessWidget {
   const RecipePortion({
@@ -38,6 +40,11 @@ class RecipePortion extends StatelessWidget {
                   minLines: 1,
                   keyboardType: TextInputType.number,
                   style: Styles.font.bsm.copyWith(color: Colors.black),
+                  onChanged: (value) {
+                    context
+                        .read<CreateRecipeCubit>()
+                        .updateRecipeInfo(portion: int.parse(value));
+                  },
                   decoration: InputDecoration(
                     hintText: 'Porsi',
                     fillColor: Colors.white,

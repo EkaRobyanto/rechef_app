@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:icons_plus/icons_plus.dart';
 
 import '../../../../../constants/styles.dart';
+import '../cubit/create_recipe_cubit.dart';
 
 class RecipeCalory extends StatelessWidget {
   const RecipeCalory({
@@ -37,6 +39,11 @@ class RecipeCalory extends StatelessWidget {
                   textAlign: TextAlign.center,
                   keyboardType: TextInputType.number,
                   minLines: 1,
+                  onChanged: (value) {
+                    context
+                        .read<CreateRecipeCubit>()
+                        .updateRecipeInfo(kalori: int.parse(value));
+                  },
                   style: Styles.font.bsm.copyWith(color: Colors.black),
                   decoration: InputDecoration(
                     hintText: 'Kalori',

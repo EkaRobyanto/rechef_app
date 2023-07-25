@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:rechef_app/src/features/recipe/presentation/create-recipe/widgets/recipe_calory.dart';
 import 'package:rechef_app/src/features/recipe/presentation/create-recipe/widgets/recipe_portion.dart';
 
 import '../../../../../constants/styles.dart';
+import '../cubit/create_recipe_cubit.dart';
 import 'recipe_difficulty.dart';
 import 'recipe_duration.dart';
 
@@ -37,6 +39,11 @@ class _InputRecipeInformationState extends State<InputRecipeInformation> {
                 controller: _recipeNameController,
                 minLines: 1,
                 maxLines: 2,
+                onChanged: (value) {
+                  context
+                      .read<CreateRecipeCubit>()
+                      .updateRecipeInfo(name: value);
+                },
                 decoration: InputDecoration(
                   hintText: 'Nama resep',
                   fillColor: Colors.white,
@@ -65,6 +72,11 @@ class _InputRecipeInformationState extends State<InputRecipeInformation> {
             Container(
               alignment: Alignment.center,
               child: TextFormField(
+                onChanged: (value) {
+                  context
+                      .read<CreateRecipeCubit>()
+                      .updateRecipeInfo(desc: value);
+                },
                 autocorrect: false,
                 textAlign: TextAlign.center,
                 controller: _recipeDescriptionController,

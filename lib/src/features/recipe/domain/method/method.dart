@@ -7,6 +7,7 @@ part 'method.g.dart';
 @freezed
 class Method with _$Method {
   factory Method({
+    String? id,
     @JsonKey(name: 'method_text') String? methodText,
   }) = _Method;
   factory Method.fromJson(Map<String, dynamic> data) => _$MethodFromJson(data);

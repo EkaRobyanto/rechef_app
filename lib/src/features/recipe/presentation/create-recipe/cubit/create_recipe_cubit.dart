@@ -11,6 +11,7 @@ import 'package:rechef_app/src/features/recipe/presentation/create-recipe/cubit/
 import '../../../../../constants/styles.dart';
 import '../../../domain/ingredient/ingredient.dart';
 import '../../../domain/ingredient_category/ingredient_category.dart';
+import '../../../domain/method/method.dart';
 
 class CreateRecipeCubit extends Cubit<CreateRecipeState> {
   File? imageCubit;
@@ -39,6 +40,26 @@ class CreateRecipeCubit extends Cubit<CreateRecipeState> {
     imageCubit = File(croppedImage.path);
     recipe = recipe.copyWith(image: croppedImage.path);
     emit(UpdateInput(Recipe(image: croppedImage.path)));
+  }
+
+  //recipe info
+  updateRecipeInfo({
+    String? name,
+    String? desc,
+    String? difficulty,
+    String? duration,
+    int? portion,
+    int? kalori,
+  }) {
+    recipe = recipe.copyWith(
+      name: name ?? recipe.name,
+      description: desc ?? recipe.description,
+      duration: duration ?? recipe.duration,
+      portion: portion ?? recipe.portion,
+      calories: kalori ?? recipe.calories,
+      difficulty: difficulty ?? recipe.difficulty,
+    );
+    emit(UpdateInput(recipe));
   }
 
   //category
@@ -117,6 +138,75 @@ class CreateRecipeCubit extends Cubit<CreateRecipeState> {
         else
           ingredientCategory
     ]);
+    emit(UpdateInput(recipe));
+  }
+
+  void addIngredientInfo({
+    required int categoryIndex,
+    required int ingredientIndex,
+    String? name,
+    int? quantity,
+    String? unit,
+    String? note,
+  }) {
+    recipe = recipe.copyWith(ingredientCategories: [
+      for (final ingredientCategory in recipe.ingredientCategories!)
+        if (recipe.ingredientCategories!.indexOf(ingredientCategory) ==
+            categoryIndex)
+          ingredientCategory.copyWith(
+            ingredients: [
+              for (final ingredient in ingredientCategory.ingredients!)
+                if (ingredientCategory.ingredients!.indexOf(ingredient) ==
+                    ingredientIndex)
+                  ingredient.copyWith(
+                    ingredientName: name ?? ingredient.ingredientName,
+                    quantity: quantity ?? ingredient.quantity,
+                    unit: unit ?? ingredient.unit,
+                    note: note ?? ingredient.note,
+                  )
+                else
+                  ingredient
+            ],
+          )
+        else
+          ingredientCategory
+    ]);
+    emit(UpdateInput(recipe));
+  }
+
+  //method
+  void addMethod() {
+    recipe = recipe.copyWith(
+      method: [
+        ...recipe.method ?? [],
+        Method(
+          id: recipe.method?.length.toString() ?? '0',
+        ),
+      ],
+    );
+    emit(UpdateInput(recipe));
+  }
+
+  void removeMethod(int index) {
+    recipe = recipe.copyWith(
+      method: [
+        for (final method in recipe.method!)
+          if (recipe.method!.indexOf(method) != index) method
+      ],
+    );
+    emit(UpdateInput(recipe));
+  }
+
+  void updateMethod(int index, String info) {
+    recipe = recipe.copyWith(
+      method: [
+        for (final method in recipe.method!)
+          if (recipe.method!.indexOf(method) == index)
+            method.copyWith(methodText: info)
+          else
+            method
+      ],
+    );
     emit(UpdateInput(recipe));
   }
 

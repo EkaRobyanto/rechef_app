@@ -20,6 +20,7 @@ Method _$MethodFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$Method {
+  String? get id => throw _privateConstructorUsedError;
   @JsonKey(name: 'method_text')
   String? get methodText => throw _privateConstructorUsedError;
 
@@ -33,7 +34,7 @@ abstract class $MethodCopyWith<$Res> {
   factory $MethodCopyWith(Method value, $Res Function(Method) then) =
       _$MethodCopyWithImpl<$Res, Method>;
   @useResult
-  $Res call({@JsonKey(name: 'method_text') String? methodText});
+  $Res call({String? id, @JsonKey(name: 'method_text') String? methodText});
 }
 
 /// @nodoc
@@ -49,9 +50,14 @@ class _$MethodCopyWithImpl<$Res, $Val extends Method>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? id = freezed,
     Object? methodText = freezed,
   }) {
     return _then(_value.copyWith(
+      id: freezed == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String?,
       methodText: freezed == methodText
           ? _value.methodText
           : methodText // ignore: cast_nullable_to_non_nullable
@@ -66,7 +72,7 @@ abstract class _$$_MethodCopyWith<$Res> implements $MethodCopyWith<$Res> {
       __$$_MethodCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({@JsonKey(name: 'method_text') String? methodText});
+  $Res call({String? id, @JsonKey(name: 'method_text') String? methodText});
 }
 
 /// @nodoc
@@ -79,9 +85,14 @@ class __$$_MethodCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? id = freezed,
     Object? methodText = freezed,
   }) {
     return _then(_$_Method(
+      id: freezed == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String?,
       methodText: freezed == methodText
           ? _value.methodText
           : methodText // ignore: cast_nullable_to_non_nullable
@@ -93,18 +104,20 @@ class __$$_MethodCopyWithImpl<$Res>
 /// @nodoc
 @JsonSerializable()
 class _$_Method implements _Method {
-  _$_Method({@JsonKey(name: 'method_text') this.methodText});
+  _$_Method({this.id, @JsonKey(name: 'method_text') this.methodText});
 
   factory _$_Method.fromJson(Map<String, dynamic> json) =>
       _$$_MethodFromJson(json);
 
+  @override
+  final String? id;
   @override
   @JsonKey(name: 'method_text')
   final String? methodText;
 
   @override
   String toString() {
-    return 'Method(methodText: $methodText)';
+    return 'Method(id: $id, methodText: $methodText)';
   }
 
   @override
@@ -112,13 +125,14 @@ class _$_Method implements _Method {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_Method &&
+            (identical(other.id, id) || other.id == id) &&
             (identical(other.methodText, methodText) ||
                 other.methodText == methodText));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, methodText);
+  int get hashCode => Object.hash(runtimeType, id, methodText);
 
   @JsonKey(ignore: true)
   @override
@@ -135,11 +149,14 @@ class _$_Method implements _Method {
 }
 
 abstract class _Method implements Method {
-  factory _Method({@JsonKey(name: 'method_text') final String? methodText}) =
-      _$_Method;
+  factory _Method(
+      {final String? id,
+      @JsonKey(name: 'method_text') final String? methodText}) = _$_Method;
 
   factory _Method.fromJson(Map<String, dynamic> json) = _$_Method.fromJson;
 
+  @override
+  String? get id;
   @override
   @JsonKey(name: 'method_text')
   String? get methodText;

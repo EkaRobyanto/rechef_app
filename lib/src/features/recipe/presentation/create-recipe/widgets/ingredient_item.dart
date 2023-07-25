@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_typeahead/flutter_typeahead.dart';
 import 'package:icons_plus/icons_plus.dart';
@@ -6,8 +7,8 @@ import 'package:rechef_app/src/features/recipe/presentation/create-recipe/cubit/
 
 import '../../../../../constants/styles.dart';
 
-class IngredientItem extends StatelessWidget {
-  const IngredientItem({
+class IngredientItem extends StatefulWidget {
+  IngredientItem({
     super.key,
     required this.ingredientIndex,
     required this.categoryIndex,
@@ -15,6 +16,23 @@ class IngredientItem extends StatelessWidget {
 
   final int ingredientIndex;
   final int categoryIndex;
+
+  @override
+  State<IngredientItem> createState() => _IngredientItemState();
+}
+
+class _IngredientItemState extends State<IngredientItem> {
+  var ingredientNameController = TextEditingController();
+  var ingredientQuantityController = TextEditingController();
+  var ingredientUnitController = TextEditingController();
+
+  @override
+  void dispose() {
+    ingredientNameController.dispose();
+    ingredientQuantityController.dispose();
+    ingredientUnitController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -39,9 +57,8 @@ class IngredientItem extends StatelessWidget {
                 ),
                 InkWell(
                   onTap: () {
-                    context
-                        .read<CreateRecipeCubit>()
-                        .removeIngredient(categoryIndex, ingredientIndex);
+                    context.read<CreateRecipeCubit>().removeIngredient(
+                        widget.categoryIndex, widget.ingredientIndex);
                   },
                   child: const Icon(
                     BoxIcons.bx_trash,
@@ -64,6 +81,7 @@ class IngredientItem extends StatelessWidget {
               height: 30,
               child: TypeAheadField(
                 textFieldConfiguration: TextFieldConfiguration(
+                  controller: ingredientNameController,
                   decoration: InputDecoration(
                     hintText: 'Cari bahan',
                     hintStyle: Styles.font.bsm.copyWith(
@@ -90,7 +108,14 @@ class IngredientItem extends StatelessWidget {
                     title: Text(suggestion.toString()),
                   );
                 },
-                onSuggestionSelected: (suggestion) {},
+                onSuggestionSelected: (suggestion) {
+                  ingredientNameController.text = suggestion.toString();
+                  context.read<CreateRecipeCubit>().addIngredientInfo(
+                        categoryIndex: widget.categoryIndex,
+                        ingredientIndex: widget.ingredientIndex,
+                        name: ingredientNameController.text,
+                      );
+                },
                 errorBuilder: (context, error) {
                   return Padding(
                     padding: const EdgeInsets.all(8.0),
@@ -119,6 +144,14 @@ class IngredientItem extends StatelessWidget {
                   width: 50,
                   height: 30,
                   child: TextField(
+                    keyboardType: TextInputType.number,
+                    onChanged: (value) {
+                      context.read<CreateRecipeCubit>().addIngredientInfo(
+                            categoryIndex: widget.categoryIndex,
+                            ingredientIndex: widget.ingredientIndex,
+                            quantity: int.parse(value),
+                          );
+                    },
                     decoration: InputDecoration(
                       hintText: 'Jumlah',
                       hintStyle: Styles.font.bsm.copyWith(
@@ -144,6 +177,13 @@ class IngredientItem extends StatelessWidget {
                   width: 50,
                   height: 30,
                   child: TextField(
+                    onChanged: (value) {
+                      context.read<CreateRecipeCubit>().addIngredientInfo(
+                            categoryIndex: widget.categoryIndex,
+                            ingredientIndex: widget.ingredientIndex,
+                            unit: value,
+                          );
+                    },
                     decoration: InputDecoration(
                       hintText: 'Satuan',
                       hintStyle: Styles.font.bsm.copyWith(
@@ -179,6 +219,13 @@ class IngredientItem extends StatelessWidget {
               width: MediaQuery.of(context).size.width * 0.8,
               // height: 30,
               child: TextField(
+                onChanged: (value) {
+                  context.read<CreateRecipeCubit>().addIngredientInfo(
+                        categoryIndex: widget.categoryIndex,
+                        ingredientIndex: widget.ingredientIndex,
+                        note: value,
+                      );
+                },
                 decoration: InputDecoration(
                   isDense: true,
                   hintText: 'Catatan',

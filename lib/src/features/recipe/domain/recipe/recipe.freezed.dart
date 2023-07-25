@@ -30,6 +30,7 @@ mixin _$Recipe {
   String? get duration => throw _privateConstructorUsedError;
   int? get portion => throw _privateConstructorUsedError;
   int? get calories => throw _privateConstructorUsedError;
+  String? get difficulty => throw _privateConstructorUsedError;
   @JsonKey(name: 'is_hidden_like')
   bool? get isHiddenLike => throw _privateConstructorUsedError;
   @JsonKey(name: 'is_hidden_comment')
@@ -59,6 +60,7 @@ abstract class $RecipeCopyWith<$Res> {
       String? duration,
       int? portion,
       int? calories,
+      String? difficulty,
       @JsonKey(name: 'is_hidden_like') bool? isHiddenLike,
       @JsonKey(name: 'is_hidden_comment') bool? isHiddenComment,
       List<Method>? method,
@@ -88,6 +90,7 @@ class _$RecipeCopyWithImpl<$Res, $Val extends Recipe>
     Object? duration = freezed,
     Object? portion = freezed,
     Object? calories = freezed,
+    Object? difficulty = freezed,
     Object? isHiddenLike = freezed,
     Object? isHiddenComment = freezed,
     Object? method = freezed,
@@ -134,6 +137,10 @@ class _$RecipeCopyWithImpl<$Res, $Val extends Recipe>
           ? _value.calories
           : calories // ignore: cast_nullable_to_non_nullable
               as int?,
+      difficulty: freezed == difficulty
+          ? _value.difficulty
+          : difficulty // ignore: cast_nullable_to_non_nullable
+              as String?,
       isHiddenLike: freezed == isHiddenLike
           ? _value.isHiddenLike
           : isHiddenLike // ignore: cast_nullable_to_non_nullable
@@ -171,6 +178,7 @@ abstract class _$$_RecipeCopyWith<$Res> implements $RecipeCopyWith<$Res> {
       String? duration,
       int? portion,
       int? calories,
+      String? difficulty,
       @JsonKey(name: 'is_hidden_like') bool? isHiddenLike,
       @JsonKey(name: 'is_hidden_comment') bool? isHiddenComment,
       List<Method>? method,
@@ -197,6 +205,7 @@ class __$$_RecipeCopyWithImpl<$Res>
     Object? duration = freezed,
     Object? portion = freezed,
     Object? calories = freezed,
+    Object? difficulty = freezed,
     Object? isHiddenLike = freezed,
     Object? isHiddenComment = freezed,
     Object? method = freezed,
@@ -243,6 +252,10 @@ class __$$_RecipeCopyWithImpl<$Res>
           ? _value.calories
           : calories // ignore: cast_nullable_to_non_nullable
               as int?,
+      difficulty: freezed == difficulty
+          ? _value.difficulty
+          : difficulty // ignore: cast_nullable_to_non_nullable
+              as String?,
       isHiddenLike: freezed == isHiddenLike
           ? _value.isHiddenLike
           : isHiddenLike // ignore: cast_nullable_to_non_nullable
@@ -277,6 +290,7 @@ class _$_Recipe implements _Recipe {
       this.duration,
       this.portion,
       this.calories,
+      this.difficulty,
       @JsonKey(name: 'is_hidden_like') this.isHiddenLike,
       @JsonKey(name: 'is_hidden_comment') this.isHiddenComment,
       final List<Method>? method,
@@ -308,6 +322,8 @@ class _$_Recipe implements _Recipe {
   @override
   final int? calories;
   @override
+  final String? difficulty;
+  @override
   @JsonKey(name: 'is_hidden_like')
   final bool? isHiddenLike;
   @override
@@ -336,7 +352,7 @@ class _$_Recipe implements _Recipe {
 
   @override
   String toString() {
-    return 'Recipe(id: $id, name: $name, user: $user, description: $description, image: $image, view: $view, fav: $fav, duration: $duration, portion: $portion, calories: $calories, isHiddenLike: $isHiddenLike, isHiddenComment: $isHiddenComment, method: $method, ingredientCategories: $ingredientCategories)';
+    return 'Recipe(id: $id, name: $name, user: $user, description: $description, image: $image, view: $view, fav: $fav, duration: $duration, portion: $portion, calories: $calories, difficulty: $difficulty, isHiddenLike: $isHiddenLike, isHiddenComment: $isHiddenComment, method: $method, ingredientCategories: $ingredientCategories)';
   }
 
   @override
@@ -357,6 +373,8 @@ class _$_Recipe implements _Recipe {
             (identical(other.portion, portion) || other.portion == portion) &&
             (identical(other.calories, calories) ||
                 other.calories == calories) &&
+            (identical(other.difficulty, difficulty) ||
+                other.difficulty == difficulty) &&
             (identical(other.isHiddenLike, isHiddenLike) ||
                 other.isHiddenLike == isHiddenLike) &&
             (identical(other.isHiddenComment, isHiddenComment) ||
@@ -380,6 +398,7 @@ class _$_Recipe implements _Recipe {
       duration,
       portion,
       calories,
+      difficulty,
       isHiddenLike,
       isHiddenComment,
       const DeepCollectionEquality().hash(_method),
@@ -411,6 +430,7 @@ abstract class _Recipe implements Recipe {
       final String? duration,
       final int? portion,
       final int? calories,
+      final String? difficulty,
       @JsonKey(name: 'is_hidden_like') final bool? isHiddenLike,
       @JsonKey(name: 'is_hidden_comment') final bool? isHiddenComment,
       final List<Method>? method,
@@ -438,6 +458,8 @@ abstract class _Recipe implements Recipe {
   int? get portion;
   @override
   int? get calories;
+  @override
+  String? get difficulty;
   @override
   @JsonKey(name: 'is_hidden_like')
   bool? get isHiddenLike;

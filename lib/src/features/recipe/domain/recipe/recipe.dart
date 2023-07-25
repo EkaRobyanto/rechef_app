@@ -21,6 +21,7 @@ class Recipe with _$Recipe {
     String? duration,
     int? portion,
     int? calories,
+    String? difficulty,
     @JsonKey(name: 'is_hidden_like') bool? isHiddenLike,
     @JsonKey(name: 'is_hidden_comment') bool? isHiddenComment,
     List<Method>? method,

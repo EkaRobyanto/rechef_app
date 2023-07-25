@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-
 import '../../../../../constants/styles.dart';
 import 'add_ingredients_tab.dart';
+import 'add_method.dart';
 
 class CreateRecipeTabBar extends StatefulWidget {
   const CreateRecipeTabBar({
@@ -37,6 +37,7 @@ class _CreateRecipeTabBar extends State<CreateRecipeTabBar>
           labelColor: Styles.color.primary,
           unselectedLabelColor: Styles.color.dark,
           indicatorColor: Styles.color.primary,
+          onTap: (index) => FocusScope.of(context).unfocus(),
           tabs: const [
             Tab(
               child: Text(
@@ -62,19 +63,6 @@ class _CreateRecipeTabBar extends State<CreateRecipeTabBar>
           ),
         )
       ],
-    );
-  }
-}
-
-class AddMethod extends StatelessWidget {
-  const AddMethod({
-    super.key,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return Center(
-      child: Text('methodTab()'),
     );
   }
 }
