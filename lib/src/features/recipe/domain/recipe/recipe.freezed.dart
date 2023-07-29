@@ -38,6 +38,7 @@ mixin _$Recipe {
   List<Method>? get method => throw _privateConstructorUsedError;
   List<IngredientCategory>? get ingredientCategories =>
       throw _privateConstructorUsedError;
+  List<String>? get interests => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -64,7 +65,8 @@ abstract class $RecipeCopyWith<$Res> {
       @JsonKey(name: 'is_hidden_like') bool? isHiddenLike,
       @JsonKey(name: 'is_hidden_comment') bool? isHiddenComment,
       List<Method>? method,
-      List<IngredientCategory>? ingredientCategories});
+      List<IngredientCategory>? ingredientCategories,
+      List<String>? interests});
 }
 
 /// @nodoc
@@ -95,6 +97,7 @@ class _$RecipeCopyWithImpl<$Res, $Val extends Recipe>
     Object? isHiddenComment = freezed,
     Object? method = freezed,
     Object? ingredientCategories = freezed,
+    Object? interests = freezed,
   }) {
     return _then(_value.copyWith(
       id: freezed == id
@@ -157,6 +160,10 @@ class _$RecipeCopyWithImpl<$Res, $Val extends Recipe>
           ? _value.ingredientCategories
           : ingredientCategories // ignore: cast_nullable_to_non_nullable
               as List<IngredientCategory>?,
+      interests: freezed == interests
+          ? _value.interests
+          : interests // ignore: cast_nullable_to_non_nullable
+              as List<String>?,
     ) as $Val);
   }
 }
@@ -182,7 +189,8 @@ abstract class _$$_RecipeCopyWith<$Res> implements $RecipeCopyWith<$Res> {
       @JsonKey(name: 'is_hidden_like') bool? isHiddenLike,
       @JsonKey(name: 'is_hidden_comment') bool? isHiddenComment,
       List<Method>? method,
-      List<IngredientCategory>? ingredientCategories});
+      List<IngredientCategory>? ingredientCategories,
+      List<String>? interests});
 }
 
 /// @nodoc
@@ -210,6 +218,7 @@ class __$$_RecipeCopyWithImpl<$Res>
     Object? isHiddenComment = freezed,
     Object? method = freezed,
     Object? ingredientCategories = freezed,
+    Object? interests = freezed,
   }) {
     return _then(_$_Recipe(
       id: freezed == id
@@ -272,6 +281,10 @@ class __$$_RecipeCopyWithImpl<$Res>
           ? _value._ingredientCategories
           : ingredientCategories // ignore: cast_nullable_to_non_nullable
               as List<IngredientCategory>?,
+      interests: freezed == interests
+          ? _value._interests
+          : interests // ignore: cast_nullable_to_non_nullable
+              as List<String>?,
     ));
   }
 }
@@ -294,9 +307,11 @@ class _$_Recipe implements _Recipe {
       @JsonKey(name: 'is_hidden_like') this.isHiddenLike,
       @JsonKey(name: 'is_hidden_comment') this.isHiddenComment,
       final List<Method>? method,
-      final List<IngredientCategory>? ingredientCategories})
+      final List<IngredientCategory>? ingredientCategories,
+      final List<String>? interests})
       : _method = method,
-        _ingredientCategories = ingredientCategories;
+        _ingredientCategories = ingredientCategories,
+        _interests = interests;
 
   factory _$_Recipe.fromJson(Map<String, dynamic> json) =>
       _$$_RecipeFromJson(json);
@@ -350,9 +365,19 @@ class _$_Recipe implements _Recipe {
     return EqualUnmodifiableListView(value);
   }
 
+  final List<String>? _interests;
+  @override
+  List<String>? get interests {
+    final value = _interests;
+    if (value == null) return null;
+    if (_interests is EqualUnmodifiableListView) return _interests;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(value);
+  }
+
   @override
   String toString() {
-    return 'Recipe(id: $id, name: $name, user: $user, description: $description, image: $image, view: $view, fav: $fav, duration: $duration, portion: $portion, calories: $calories, difficulty: $difficulty, isHiddenLike: $isHiddenLike, isHiddenComment: $isHiddenComment, method: $method, ingredientCategories: $ingredientCategories)';
+    return 'Recipe(id: $id, name: $name, user: $user, description: $description, image: $image, view: $view, fav: $fav, duration: $duration, portion: $portion, calories: $calories, difficulty: $difficulty, isHiddenLike: $isHiddenLike, isHiddenComment: $isHiddenComment, method: $method, ingredientCategories: $ingredientCategories, interests: $interests)';
   }
 
   @override
@@ -381,7 +406,9 @@ class _$_Recipe implements _Recipe {
                 other.isHiddenComment == isHiddenComment) &&
             const DeepCollectionEquality().equals(other._method, _method) &&
             const DeepCollectionEquality()
-                .equals(other._ingredientCategories, _ingredientCategories));
+                .equals(other._ingredientCategories, _ingredientCategories) &&
+            const DeepCollectionEquality()
+                .equals(other._interests, _interests));
   }
 
   @JsonKey(ignore: true)
@@ -402,7 +429,8 @@ class _$_Recipe implements _Recipe {
       isHiddenLike,
       isHiddenComment,
       const DeepCollectionEquality().hash(_method),
-      const DeepCollectionEquality().hash(_ingredientCategories));
+      const DeepCollectionEquality().hash(_ingredientCategories),
+      const DeepCollectionEquality().hash(_interests));
 
   @JsonKey(ignore: true)
   @override
@@ -434,7 +462,8 @@ abstract class _Recipe implements Recipe {
       @JsonKey(name: 'is_hidden_like') final bool? isHiddenLike,
       @JsonKey(name: 'is_hidden_comment') final bool? isHiddenComment,
       final List<Method>? method,
-      final List<IngredientCategory>? ingredientCategories}) = _$_Recipe;
+      final List<IngredientCategory>? ingredientCategories,
+      final List<String>? interests}) = _$_Recipe;
 
   factory _Recipe.fromJson(Map<String, dynamic> json) = _$_Recipe.fromJson;
 
@@ -470,6 +499,8 @@ abstract class _Recipe implements Recipe {
   List<Method>? get method;
   @override
   List<IngredientCategory>? get ingredientCategories;
+  @override
+  List<String>? get interests;
   @override
   @JsonKey(ignore: true)
   _$$_RecipeCopyWith<_$_Recipe> get copyWith =>

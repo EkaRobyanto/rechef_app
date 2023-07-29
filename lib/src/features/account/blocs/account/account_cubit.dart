@@ -1,17 +1,20 @@
 import 'dart:developer';
 
 import 'package:bloc/bloc.dart';
+import 'package:rechef_app/src/core/repository/storage_repository.dart';
 import 'package:rechef_app/src/features/account/blocs/account/account_state.dart';
 import 'package:rechef_app/src/features/account/repository/user_repository_impl.dart';
 
 class AccountCubit extends Cubit<AccountState> {
   final UserRepositoryImpl userRepo;
-  AccountCubit(this.userRepo) : super(AccountInitial());
+  final StorageRepository storageRepo;
+  AccountCubit(this.userRepo, this.storageRepo) : super(AccountInitial());
 
-  void loadAccount(String token) async {
+  void loadAccount() async {
     emit(AccountLoading());
     try {
-      final data = await userRepo.getAccount(token);
+      var tokens = await storageRepo.getTokens();
+      final data = await userRepo.getAccount(tokens['access']!);
       emit(AccountLoaded(data));
     } catch (e) {
       emit(AccountLoadError(e.toString()));

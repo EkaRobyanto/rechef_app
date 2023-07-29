@@ -2,7 +2,7 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
-import 'package:rechef_app/src/core/auth/bloc/auth_event.dart';
+import 'package:rechef_app/src/core/bloc/auth_event.dart';
 
 import 'package:rechef_app/src/features/auth/presentation/login/bloc/login_bloc.dart';
 import 'package:rechef_app/src/features/auth/presentation/login/bloc/login_event.dart';
@@ -12,18 +12,16 @@ import 'package:rechef_app/src/utills/show_scale_dialog.dart';
 import 'package:top_snackbar_flutter/custom_snack_bar.dart';
 import 'package:top_snackbar_flutter/top_snack_bar.dart';
 
-import '../../../../constants/image_path.dart';
 import '../../../../constants/styles.dart';
-import '../../../../core/auth/bloc/auth_bloc.dart';
-import '../../../../core/auth/bloc/auth_states.dart';
-import '../../../../routes/app_router.dart';
+import '../../../../core/bloc/auth_bloc.dart';
+import '../../../../core/bloc/auth_states.dart';
 
+import '../../../../core/repository/storage_repository.dart';
 import '../../../../shared/dialogs.dart';
 import '../../../../shared/shrink_button.dart';
 import '../../../../shared/text_input.dart';
 
-import '../../../../core/auth/repository/auth_repository_impl.dart';
-import '../register/widgets/oauth_button.dart';
+import '../../../../core/repository/auth_repository_impl.dart';
 import 'widget/oauth_option.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -82,6 +80,7 @@ class _LoginScreenState extends State<LoginScreen> {
           body: BlocProvider(
             create: (context) => LoginBloc(
               RepositoryProvider.of<AuthRepositoryImpl>(context),
+              RepositoryProvider.of<StorageRepository>(context),
             ),
             child: MultiBlocListener(
               listeners: [
@@ -195,7 +194,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                 const SizedBox(
                                   height: 25,
                                 ),
-                                const OAuthOptions(),
+                                // const OAuthOptions(),
                                 const SizedBox(
                                   height: 50,
                                 ),

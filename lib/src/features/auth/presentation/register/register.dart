@@ -9,7 +9,7 @@ import '../../../../utills/show_scale_dialog.dart';
 import '../../../../shared/dialogs.dart';
 import '../../../../shared/shrink_button.dart';
 import '../../../../shared/text_input.dart';
-import '../../../../core/auth/repository/auth_repository_impl.dart';
+import '../../../../core/repository/auth_repository_impl.dart';
 
 import 'bloc/register_bloc.dart';
 import 'bloc/register_state.dart';
@@ -138,12 +138,12 @@ class _RegisterState extends State<Register> {
                             ),
                             TextInput(
                               label: 'Kata Sandi',
-                              hint: 'Password minimal berisi 6 karakter',
+                              hint: 'Password minimal berisi 8 karakter',
                               validator: (value) {
                                 if (passwordController.text.isEmpty) {
                                   return 'Kata sandi tidak boleh kosong';
-                                } else if (passwordController.text.length < 6) {
-                                  return 'Kata sandi minimal berisi 6 karakter';
+                                } else if (passwordController.text.length < 8) {
+                                  return 'Kata sandi minimal berisi 8 karakter';
                                 }
                                 return null;
                               },

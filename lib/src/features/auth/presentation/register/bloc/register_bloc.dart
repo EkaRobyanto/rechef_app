@@ -2,7 +2,7 @@ import 'dart:developer';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:rechef_app/src/features/auth/domain/user_regist.dart';
-import 'package:rechef_app/src/core/auth/repository/auth_repository_impl.dart';
+import 'package:rechef_app/src/core/repository/auth_repository_impl.dart';
 
 import 'register_event.dart';
 import 'register_state.dart';

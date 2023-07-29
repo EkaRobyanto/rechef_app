@@ -17,7 +17,7 @@ class FeedBloc extends Bloc<FeedEvent, FeedState> {
         try {
           var connection = await checkConnection();
           if (connection) {
-            await recipeRepo.getRecipesFeed('', event.category);
+            await recipeRepo.getRecipesFeed('');
             emit(FeedLoaded(const []));
           } else {
             throw ('No Internet Connection');

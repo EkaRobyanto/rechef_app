@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
-import 'package:rechef_app/src/core/auth/bloc/auth_bloc.dart';
-import 'package:rechef_app/src/core/auth/bloc/auth_event.dart';
-import 'package:rechef_app/src/core/auth/bloc/auth_states.dart';
+import 'package:rechef_app/src/core/bloc/auth_bloc.dart';
+import 'package:rechef_app/src/core/bloc/auth_event.dart';
+import 'package:rechef_app/src/core/bloc/auth_states.dart';
 import 'package:rechef_app/src/features/account/presentation/account/account.dart';
 import 'package:rechef_app/src/features/recipe/presentation/favorite/favorite.dart';
 import 'package:rechef_app/src/features/auth/presentation/register/bloc/register_bloc.dart';

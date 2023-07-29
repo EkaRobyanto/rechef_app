@@ -1,7 +1,6 @@
 import 'dart:developer';
 import 'dart:io';
-import 'dart:ui';
-
+import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_cropper/image_cropper.dart';
 import 'package:image_picker/image_picker.dart';
@@ -9,14 +8,35 @@ import 'package:rechef_app/src/features/recipe/domain/recipe/recipe.dart';
 import 'package:rechef_app/src/features/recipe/presentation/create-recipe/cubit/create_recipe_state.dart';
 
 import '../../../../../constants/styles.dart';
+import '../../../../../core/repository/storage_repository.dart';
 import '../../../domain/ingredient/ingredient.dart';
 import '../../../domain/ingredient_category/ingredient_category.dart';
 import '../../../domain/method/method.dart';
+import '../../../repository/recipe_repository_impl.dart';
 
 class CreateRecipeCubit extends Cubit<CreateRecipeState> {
   File? imageCubit;
   var recipe = Recipe();
-  CreateRecipeCubit() : super(CreateRecipeInitial());
+  final RecipeRepositoryImpl recipeRepositoryImpl;
+  final StorageRepository storageRepository;
+  CreateRecipeCubit({
+    required this.recipeRepositoryImpl,
+    required this.storageRepository,
+  }) : super(CreateRecipeInitial());
+
+  submitRecipe() async {
+    emit(Loading());
+    try {
+      final tokens = await storageRepository.getTokens();
+      await recipeRepositoryImpl.createRecipe(
+        tokens['access']!,
+        recipe,
+      );
+      emit(CreateRecipeSucces());
+    } catch (e) {
+      emit(Error(e.toString()));
+    }
+  }
 
   void pickImage(ImageSource source) async {
     final ImagePicker picker = ImagePicker();

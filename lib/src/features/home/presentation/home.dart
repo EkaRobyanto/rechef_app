@@ -10,6 +10,7 @@ import 'package:rechef_app/src/shared/error_screen.dart';
 import 'package:rechef_app/src/shared/loading_screen.dart';
 import 'package:rechef_app/src/shared/shrink_widget.dart';
 
+import '../../../core/repository/storage_repository.dart';
 import '../../../shared/recipe_card.dart';
 import '../bloc/home_state.dart';
 import 'widgets/recipe_category_card.dart';
@@ -23,8 +24,9 @@ class Home extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (context) => HomeBloc(
-          homeRepository: RepositoryProvider.of<HomeRepositoryImpl>(context))
-        ..add(
+        homeRepository: RepositoryProvider.of<HomeRepositoryImpl>(context),
+        storageRepository: RepositoryProvider.of<StorageRepository>(context),
+      )..add(
           //Todo token
           LoadHome(''),
         ),

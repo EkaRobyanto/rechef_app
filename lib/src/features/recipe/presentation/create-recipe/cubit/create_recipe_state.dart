@@ -18,3 +18,22 @@ class UpdateInput extends CreateRecipeState {
   @override
   List<Object> get props => [recipe];
 }
+
+class Loading extends CreateRecipeState {
+  @override
+  List<Object> get props => [];
+}
+
+class CreateRecipeSucces extends CreateRecipeState {
+  @override
+  List<Object> get props => [];
+}
+
+class Error extends CreateRecipeState {
+  final String message;
+
+  Error(this.message);
+
+  @override
+  List<Object> get props => [message];
+}

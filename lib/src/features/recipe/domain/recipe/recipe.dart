@@ -26,6 +26,7 @@ class Recipe with _$Recipe {
     @JsonKey(name: 'is_hidden_comment') bool? isHiddenComment,
     List<Method>? method,
     List<IngredientCategory>? ingredientCategories,
+    List<String>? interests,
   }) = _Recipe;
 
   factory Recipe.fromJson(Map<String, dynamic> json) => _$RecipeFromJson(json);

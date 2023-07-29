@@ -1,14 +1,16 @@
 import 'dart:developer';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:rechef_app/src/core/auth/repository/auth_repository_impl.dart';
+import 'package:rechef_app/src/core/repository/auth_repository_impl.dart';
 
+import '../../../../../core/repository/storage_repository.dart';
 import 'login_event.dart';
 import 'login_state.dart';
 
 class LoginBloc extends Bloc<LoginEvent, LoginState> {
   final AuthRepositoryImpl authRepo;
-  LoginBloc(this.authRepo) : super(InitialState()) {
+  final StorageRepository storageRepo;
+  LoginBloc(this.authRepo, this.storageRepo) : super(InitialState()) {
     on<LoginRequest>(
       (event, emit) async {
         emit(LoginLoading());
@@ -17,7 +19,11 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
           'password': event.password,
         };
         try {
-          await authRepo.login(data);
+          var tokens = await authRepo.login(data);
+          await storageRepo.accessStorage().then((value) {
+            value.setString('access', tokens['access']);
+            value.setString('refresh', tokens['refresh']);
+          });
           emit(LoginSuccess());
         } catch (e) {
           emit(LoginFailed(e.toString()));

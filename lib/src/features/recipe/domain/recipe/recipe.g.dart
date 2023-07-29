@@ -26,6 +26,9 @@ _$_Recipe _$$_RecipeFromJson(Map<String, dynamic> json) => _$_Recipe(
       ingredientCategories: (json['ingredientCategories'] as List<dynamic>?)
           ?.map((e) => IngredientCategory.fromJson(e as Map<String, dynamic>))
           .toList(),
+      interests: (json['interests'] as List<dynamic>?)
+          ?.map((e) => e as String)
+          .toList(),
     );
 
 Map<String, dynamic> _$$_RecipeToJson(_$_Recipe instance) => <String, dynamic>{
@@ -44,4 +47,5 @@ Map<String, dynamic> _$$_RecipeToJson(_$_Recipe instance) => <String, dynamic>{
       'is_hidden_comment': instance.isHiddenComment,
       'method': instance.method,
       'ingredientCategories': instance.ingredientCategories,
+      'interests': instance.interests,
     };

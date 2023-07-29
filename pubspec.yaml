@@ -44,7 +44,7 @@ dependencies:
   im_stepper: ^1.0.1+1
   freezed_annotation: ^2.2.0
   json_annotation: ^4.8.1
-  shared_preferences: ^2.1.2
+  shared_preferences: ^2.2.0
   top_snackbar_flutter: ^3.0.0+1
   lottie: ^2.3.2
   connectivity_plus: ^4.0.1
@@ -54,6 +54,7 @@ dependencies:
   image_cropper: ^5.0.0
   flutter_typeahead: ^4.6.2
   hidable: ^1.0.4
+  dio: ^5.3.0
 
 dev_dependencies:
   flutter_test:

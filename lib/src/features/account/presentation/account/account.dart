@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../constants/styles.dart';
+import '../../../../core/repository/storage_repository.dart';
 import '../../../../shared/circle_net_pic.dart';
 import '../../../../shared/error_screen.dart';
 import '../../../../shared/loading_screen.dart';
@@ -20,7 +21,8 @@ class Account extends StatelessWidget {
     return BlocProvider(
       create: (context) => AccountCubit(
         RepositoryProvider.of<UserRepositoryImpl>(context),
-      )..loadAccount(''),
+        RepositoryProvider.of<StorageRepository>(context),
+      )..loadAccount(),
       child: BlocBuilder<AccountCubit, AccountState>(
         builder: (context, state) {
           if (state is AccountLoading) {
@@ -32,7 +34,7 @@ class Account extends StatelessWidget {
               body: ErrorScreen(
                 error: state.error,
                 onRetry: () {
-                  context.read<AccountCubit>().loadAccount('');
+                  context.read<AccountCubit>().loadAccount();
                 },
               ),
             );
