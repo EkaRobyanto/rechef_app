@@ -40,7 +40,7 @@ class RecipeCard extends StatelessWidget {
                 height: 120,
                 width: 120,
                 decoration: BoxDecoration(
-                  color: Colors.red,
+                  // color: Colors.red,
                   borderRadius: BorderRadius.circular(5),
                   image: DecorationImage(
                     image: Image.network(recipe?.image ??

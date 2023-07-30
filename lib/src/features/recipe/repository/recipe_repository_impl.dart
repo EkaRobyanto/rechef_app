@@ -28,19 +28,20 @@ class RecipeRepositoryImpl extends RecipeRepository {
   }
 
   @override
-  Future<List> getRecipesFeed(String token) async {
+  Future getRecipesFeed(String token) async {
     try {
-      return await api.call(
-        request: () async {
-          return await client.getUri(
-            api.listRecipe(),
-            options: Options(
-              headers: {'Authorization': 'Bearer $token'},
-            ),
-          );
-        },
-        parse: (data) => data,
-      );
+      return await api.call(request: () async {
+        return await client.getUri(
+          api.listRecipe(),
+          options: Options(
+            headers: {'Authorization': 'Bearer $token'},
+          ),
+        );
+      }, parse: (data) {
+        return data['results'].map((recipe) {
+          return Recipe.fromJson(recipe);
+        }).toList();
+      });
     } catch (e) {
       throw (e.toString());
     }
