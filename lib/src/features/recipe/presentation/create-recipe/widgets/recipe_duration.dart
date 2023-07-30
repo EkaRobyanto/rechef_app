@@ -38,7 +38,7 @@ class RecipeDuration extends StatelessWidget {
                   onChanged: (value) {
                     context
                         .read<CreateRecipeCubit>()
-                        .updateRecipeInfo(duration: value);
+                        .updateRecipeInfo(duration: int.parse(value));
                   },
                   autocorrect: false,
                   textAlign: TextAlign.center,

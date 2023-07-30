@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
+import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 import 'package:rechef_app/src/constants/image_path.dart';
 import 'package:rechef_app/src/constants/styles.dart';
 import 'package:rechef_app/src/features/home/bloc/home_bloc.dart';
 import 'package:rechef_app/src/features/home/bloc/home_event.dart';
 import 'package:rechef_app/src/features/home/repository/home_repository_impl.dart';
+import 'package:rechef_app/src/features/recipe/domain/recipe/recipe.dart';
 import 'package:rechef_app/src/shared/error_screen.dart';
 import 'package:rechef_app/src/shared/loading_screen.dart';
 import 'package:rechef_app/src/shared/shrink_widget.dart';
@@ -26,10 +28,7 @@ class Home extends StatelessWidget {
       create: (context) => HomeBloc(
         homeRepository: RepositoryProvider.of<HomeRepositoryImpl>(context),
         storageRepository: RepositoryProvider.of<StorageRepository>(context),
-      )..add(
-          //Todo token
-          LoadHome(''),
-        ),
+      )..add(LoadHome()),
       child: BlocBuilder<HomeBloc, HomeState>(
         builder: (context, state) {
           if (state is HomeLoading) {
@@ -37,13 +36,14 @@ class Home extends StatelessWidget {
           } else if (state is HomeLoadError) {
             return ErrorScreen(
               error: state.error,
-              onRetry: () => context.read<HomeBloc>().add(
-                    //Todo token
-                    LoadHome(''),
-                  ),
+              onRetry: () => context.read<HomeBloc>().add(LoadHome()),
+            );
+          } else if (state is HomeLoadSucces) {
+            return HomeScreen(
+              recipes: state.recipes,
             );
           }
-          return const HomeScreen();
+          return const SizedBox();
         },
       ),
     );
@@ -53,7 +53,10 @@ class Home extends StatelessWidget {
 class HomeScreen extends StatefulWidget {
   const HomeScreen({
     super.key,
+    required this.recipes,
   });
+
+  final List<dynamic> recipes;
 
   @override
   State<HomeScreen> createState() => _HomeScreenState();
@@ -61,6 +64,9 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   late ScrollController _scrollController;
+  // final _pagingController = PagingController<int, Recipe>(
+  //   firstPageKey: 0,
+  // );
   double _scrollControllerOffset = 0;
 
   _scrollListener() {
@@ -73,12 +79,16 @@ class _HomeScreenState extends State<HomeScreen> {
   void initState() {
     _scrollController = ScrollController();
     _scrollController.addListener(_scrollListener);
+    // _pagingController.addPageRequestListener((pageKey) {
+    //   context.read<HomeBloc>().add(LoadHome());
+    // });
     super.initState();
   }
 
   @override
   void dispose() {
     _scrollController.dispose();
+    // _pagingController.dispose();
     super.dispose();
   }
 
@@ -124,7 +134,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           Padding(
                             padding: const EdgeInsets.symmetric(horizontal: 20),
                             child: Text(
-                              'Populer minggu ini',
+                              'Resep Rekomendasi',
                               style: Styles.font.bxl,
                             ),
                           ),
@@ -132,15 +142,19 @@ class _HomeScreenState extends State<HomeScreen> {
                           SizedBox(
                             height: 150,
                             child: ListView.builder(
-                              itemCount: 3,
+                              itemCount: widget.recipes.length > 3
+                                  ? 3
+                                  : widget.recipes.length,
                               shrinkWrap: true,
                               scrollDirection: Axis.horizontal,
                               physics: const BouncingScrollPhysics(),
                               itemBuilder: (context, index) {
-                                return const Padding(
-                                  padding: EdgeInsets.only(left: 20),
+                                return Padding(
+                                  padding: const EdgeInsets.only(left: 20),
                                   child: ShrinkWidget(
-                                    child: RecomendationCard(),
+                                    child: RecomendationCard(
+                                      recipe: widget.recipes[index],
+                                    ),
                                   ),
                                 );
                               },
@@ -203,25 +217,29 @@ class _HomeScreenState extends State<HomeScreen> {
                           const SizedBox(
                             height: 20,
                           ),
-                          Padding(
-                            padding: const EdgeInsets.symmetric(horizontal: 20),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  'Terakhir dilihat',
-                                  style: Styles.font.bxl,
-                                ),
-                                ListView.builder(
-                                  itemCount: 3,
-                                  shrinkWrap: true,
-                                  physics: const NeverScrollableScrollPhysics(),
-                                  itemBuilder: (context, index) =>
-                                      const RecipeCard(),
-                                ),
-                              ],
+                          if (widget.recipes.length > 3)
+                            Padding(
+                              padding:
+                                  const EdgeInsets.symmetric(horizontal: 20),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    'Jelajahi Resep',
+                                    style: Styles.font.bxl,
+                                  ),
+                                  ListView.builder(
+                                    itemCount: widget.recipes.length - 3,
+                                    shrinkWrap: true,
+                                    physics:
+                                        const NeverScrollableScrollPhysics(),
+                                    itemBuilder: (context, index) => RecipeCard(
+                                      recipe: widget.recipes[index + 3],
+                                    ),
+                                  ),
+                                ],
+                              ),
                             ),
-                          ),
                           SizedBox(
                             height: MediaQuery.of(context).size.height * 0.05,
                           ),

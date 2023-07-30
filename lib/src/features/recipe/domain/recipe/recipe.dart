@@ -11,22 +11,22 @@ part 'recipe.g.dart';
 @freezed
 class Recipe with _$Recipe {
   factory Recipe({
-    String? id,
-    String? name,
-    String? user,
-    String? description,
-    String? image,
-    int? view,
-    int? fav,
-    String? duration,
-    int? portion,
-    int? calories,
-    String? difficulty,
-    @JsonKey(name: 'is_hidden_like') bool? isHiddenLike,
-    @JsonKey(name: 'is_hidden_comment') bool? isHiddenComment,
-    List<Method>? method,
-    List<IngredientCategory>? ingredientCategories,
-    List<String>? interests,
+    @Default(null) String? id,
+    @Default(null) String? name,
+    @Default(null) String? user,
+    @Default(null) String? description,
+    @Default(null) String? image,
+    @Default(null) int? view,
+    @Default(null) int? fav,
+    @Default(null) int? duration,
+    @Default(null) int? portion,
+    @Default(null) int? calories,
+    @Default('') String? difficulty,
+    @Default(null) List<String>? interests,
+    @Default(null) List<Method>? method,
+    @Default(null) List<IngredientCategory>? ingredientCategories,
+    @JsonKey(name: 'is_hidden_like') @Default(null) bool? isHiddenLike,
+    @JsonKey(name: 'is_hidden_comment') @Default(null) bool? isHiddenComment,
   }) = _Recipe;
 
   factory Recipe.fromJson(Map<String, dynamic> json) => _$RecipeFromJson(json);

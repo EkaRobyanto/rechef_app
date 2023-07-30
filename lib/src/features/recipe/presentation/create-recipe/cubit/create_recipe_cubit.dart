@@ -67,7 +67,7 @@ class CreateRecipeCubit extends Cubit<CreateRecipeState> {
     String? name,
     String? desc,
     String? difficulty,
-    String? duration,
+    int? duration,
     int? portion,
     int? kalori,
   }) {

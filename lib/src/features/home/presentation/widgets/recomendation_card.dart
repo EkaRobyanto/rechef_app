@@ -1,11 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:rechef_app/src/features/recipe/domain/recipe/recipe.dart';
 
 import '../../../../constants/styles.dart';
 
 class RecomendationCard extends StatelessWidget {
-  const RecomendationCard({
+  RecomendationCard({
     super.key,
+    required this.recipe,
   });
+
+  Recipe recipe;
 
   @override
   Widget build(BuildContext context) {
@@ -17,8 +21,8 @@ class RecomendationCard extends StatelessWidget {
             height: 150,
             width: 260,
             child: Image.network(
+              recipe.image ?? 'https://picsum.photos/200/300/?blur',
               fit: BoxFit.fitWidth,
-              'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRNxebVRZaEqJkZOUL8cYZYcjUbm2-jhYY7gr0Z8VUH&s',
             ),
           ),
           Container(
@@ -44,7 +48,7 @@ class RecomendationCard extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  'Ayam Goreng',
+                  recipe.name!,
                   style: Styles.font.bold.copyWith(
                     color: Colors.white,
                     fontSize: 20,
@@ -54,7 +58,7 @@ class RecomendationCard extends StatelessWidget {
                   height: 15,
                 ),
                 Text(
-                  'lorem ipsum dolor sit amet lorem ipsum dolor sit amet lorem ipsum dolor sit amet lorem ipsum dolor sit amet lorem ipsum dolor sit amet',
+                  recipe.description!,
                   style: Styles.font.xsm.copyWith(
                     color: Colors.white,
                   ),

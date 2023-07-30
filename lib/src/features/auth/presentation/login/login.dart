@@ -22,7 +22,6 @@ import '../../../../shared/shrink_button.dart';
 import '../../../../shared/text_input.dart';
 
 import '../../../../core/repository/auth_repository_impl.dart';
-import 'widget/oauth_option.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});

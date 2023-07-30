@@ -1,3 +1,3 @@
 abstract class HomeRepository {
-  Future<String> getHomeData(String token);
+  Future getHomeData(String token);
 }

@@ -8,8 +8,11 @@ class HomeLoading extends HomeState {
 }
 
 class HomeLoadSucces extends HomeState {
+  List recipes;
+
+  HomeLoadSucces({required this.recipes});
   @override
-  List<Object?> get props => [];
+  List<Object?> get props => [recipes];
 }
 
 class HomeLoadError extends HomeState {

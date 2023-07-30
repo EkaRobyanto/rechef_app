@@ -7,28 +7,32 @@ part of 'recipe.dart';
 // **************************************************************************
 
 _$_Recipe _$$_RecipeFromJson(Map<String, dynamic> json) => _$_Recipe(
-      id: json['id'] as String?,
-      name: json['name'] as String?,
-      user: json['user'] as String?,
-      description: json['description'] as String?,
-      image: json['image'] as String?,
-      view: json['view'] as int?,
-      fav: json['fav'] as int?,
-      duration: json['duration'] as String?,
-      portion: json['portion'] as int?,
-      calories: json['calories'] as int?,
-      difficulty: json['difficulty'] as String?,
-      isHiddenLike: json['is_hidden_like'] as bool?,
-      isHiddenComment: json['is_hidden_comment'] as bool?,
-      method: (json['method'] as List<dynamic>?)
-          ?.map((e) => Method.fromJson(e as Map<String, dynamic>))
-          .toList(),
-      ingredientCategories: (json['ingredientCategories'] as List<dynamic>?)
-          ?.map((e) => IngredientCategory.fromJson(e as Map<String, dynamic>))
-          .toList(),
+      id: json['id'] as String? ?? null,
+      name: json['name'] as String? ?? null,
+      user: json['user'] as String? ?? null,
+      description: json['description'] as String? ?? null,
+      image: json['image'] as String? ?? null,
+      view: json['view'] as int? ?? null,
+      fav: json['fav'] as int? ?? null,
+      duration: json['duration'] as int? ?? null,
+      portion: json['portion'] as int? ?? null,
+      calories: json['calories'] as int? ?? null,
+      difficulty: json['difficulty'] as String? ?? '',
       interests: (json['interests'] as List<dynamic>?)
-          ?.map((e) => e as String)
-          .toList(),
+              ?.map((e) => e as String)
+              .toList() ??
+          null,
+      method: (json['method'] as List<dynamic>?)
+              ?.map((e) => Method.fromJson(e as Map<String, dynamic>))
+              .toList() ??
+          null,
+      ingredientCategories: (json['ingredientCategories'] as List<dynamic>?)
+              ?.map(
+                  (e) => IngredientCategory.fromJson(e as Map<String, dynamic>))
+              .toList() ??
+          null,
+      isHiddenLike: json['is_hidden_like'] as bool? ?? null,
+      isHiddenComment: json['is_hidden_comment'] as bool? ?? null,
     );
 
 Map<String, dynamic> _$$_RecipeToJson(_$_Recipe instance) => <String, dynamic>{
@@ -43,9 +47,9 @@ Map<String, dynamic> _$$_RecipeToJson(_$_Recipe instance) => <String, dynamic>{
       'portion': instance.portion,
       'calories': instance.calories,
       'difficulty': instance.difficulty,
-      'is_hidden_like': instance.isHiddenLike,
-      'is_hidden_comment': instance.isHiddenComment,
+      'interests': instance.interests,
       'method': instance.method,
       'ingredientCategories': instance.ingredientCategories,
-      'interests': instance.interests,
+      'is_hidden_like': instance.isHiddenLike,
+      'is_hidden_comment': instance.isHiddenComment,
     };

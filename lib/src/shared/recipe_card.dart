@@ -3,10 +3,15 @@ import 'package:go_router/go_router.dart';
 import 'package:rechef_app/src/constants/styles.dart';
 import 'package:rechef_app/src/shared/shrink_widget.dart';
 
+import '../features/recipe/domain/recipe/recipe.dart';
+
 class RecipeCard extends StatelessWidget {
   const RecipeCard({
     super.key,
+    this.recipe,
   });
+
+  final Recipe? recipe;
 
   @override
   Widget build(BuildContext context) {
@@ -38,7 +43,7 @@ class RecipeCard extends StatelessWidget {
                   color: Colors.red,
                   borderRadius: BorderRadius.circular(5),
                   image: DecorationImage(
-                    image: Image.network(
+                    image: Image.network(recipe?.image ??
                             'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRNxebVRZaEqJkZOUL8cYZYcjUbm2-jhYY7gr0Z8VUH&s')
                         .image,
                     fit: BoxFit.fitHeight,
@@ -55,7 +60,7 @@ class RecipeCard extends StatelessWidget {
                     height: 10,
                   ),
                   Text(
-                    'Rendang Babi',
+                    recipe?.name ?? 'Rendang Babi',
                     style: Styles.font.blg,
                   ),
                   const SizedBox(
@@ -68,7 +73,7 @@ class RecipeCard extends StatelessWidget {
                         style: Styles.font.sm,
                       ),
                       Text(
-                        'Shofinia',
+                        recipe?.user ?? 'Shofinia',
                         style: Styles.font.bsm,
                       ),
                     ],
@@ -79,7 +84,8 @@ class RecipeCard extends StatelessWidget {
                   SizedBox(
                     width: MediaQuery.of(context).size.width * 0.5,
                     child: Text(
-                      'Rendang ayam Padang adalah masakan yang terbuat dari daging ayam yang dimasak lama untuk mendapatkan rasa yang otentik. ',
+                      recipe?.description ??
+                          'Rendang ayam Padang adalah masakan yang terbuat dari daging ayam yang dimasak lama untuk mendapatkan rasa yang otentik. ',
                       style: Styles.font.sm,
                       maxLines: 3,
                       overflow: TextOverflow.ellipsis,

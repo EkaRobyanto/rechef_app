@@ -1,7 +1,7 @@
 import 'dart:developer';
 
 import 'package:dio/dio.dart';
-import 'package:flutter/widgets.dart';
+import 'package:flutter/material.dart';
 import 'package:rechef_app/src/shared/exceptions/network_exception.dart';
 
 import '../../shared/exceptions/token_exception.dart';
@@ -58,7 +58,7 @@ class APIService {
           throw NetworkException('Connection Timeout');
         },
       );
-      log(response.data.toString());
+      // debugPrint(response.data.toString());
       return parse(response.data);
     } on DioException catch (e) {
       Response? res = e.response;

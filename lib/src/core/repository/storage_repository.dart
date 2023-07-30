@@ -10,19 +10,19 @@ class StorageRepository {
   Future<Map<String, String?>> getTokens() async {
     String? token, refreshToken;
     await accessStorage().then((value) {
-      token = value.getString('token');
-      refreshToken = value.getString('refreshToken');
+      token = value.getString('access');
+      refreshToken = value.getString('refresh');
     });
     return {
-      'token': token,
-      'refreshToken': refreshToken,
+      'access': token,
+      'refresh': refreshToken,
     };
   }
 
   Future updateToken(Map<String, dynamic> data) async {
     await accessStorage().then((value) {
-      value.setString('token', data['access']);
-      value.setString('refreshToken', data['refresh']);
+      value.setString('access', data['access']);
+      value.setString('refresh', data['refresh']);
     });
     log('token updated');
   }
