@@ -4,9 +4,12 @@ import '../../../../../constants/styles.dart';
 import '../../../../../shared/shrink_widget.dart';
 
 class AccountHeader extends StatelessWidget {
-  const AccountHeader({
+  AccountHeader({
     super.key,
+    required this.accountData,
   });
+
+  dynamic accountData;
 
   @override
   Widget build(BuildContext context) {
@@ -26,7 +29,7 @@ class AccountHeader extends StatelessWidget {
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(100),
                 child: Image.network(
-                  'https://picsum.photos/200',
+                  accountData['image'] ?? 'https://picsum.photos/200',
                   fit: BoxFit.fill,
                   loadingBuilder: (context, child, loadingProgress) =>
                       loadingProgress == null
@@ -47,43 +50,8 @@ class AccountHeader extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Text(
-                  'JohnDower',
+                  accountData['username'],
                   style: Styles.font.blg,
-                ),
-                const SizedBox(
-                  height: 15,
-                ),
-                Row(
-                  children: [
-                    RichText(
-                        text: TextSpan(children: [
-                      TextSpan(
-                        text: '12',
-                        style: Styles.font.bsm,
-                      ),
-                      TextSpan(
-                        text: ' Mengikuti',
-                        style: Styles.font.sm,
-                      ),
-                    ])),
-                    const SizedBox(
-                      width: 10,
-                    ),
-                    RichText(
-                      text: TextSpan(
-                        children: [
-                          TextSpan(
-                            text: '12',
-                            style: Styles.font.bsm,
-                          ),
-                          TextSpan(
-                            text: ' Pengikut',
-                            style: Styles.font.sm,
-                          ),
-                        ],
-                      ),
-                    ),
-                  ],
                 ),
               ],
             )
@@ -93,7 +61,7 @@ class AccountHeader extends StatelessWidget {
           height: 15,
         ),
         Text(
-          'Saya Suka Memasak, Memasak adalah gaya hidup saya',
+          accountData['bio'] ?? 'Anda belum membuat bio',
           style: Styles.font.sm,
         ),
         const SizedBox(
@@ -122,24 +90,6 @@ class AccountHeader extends StatelessWidget {
             ),
             const SizedBox(
               width: 10,
-            ),
-            Expanded(
-              child: ShrinkWidget(
-                child: Container(
-                  height: 40,
-                  alignment: Alignment.center,
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 5, vertical: 8),
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.circular(5),
-                  ),
-                  child: Text(
-                    'Bagikan Profil',
-                    style: Styles.font.bsm,
-                  ),
-                ),
-              ),
             ),
           ],
         ),

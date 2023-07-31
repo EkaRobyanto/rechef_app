@@ -68,7 +68,7 @@ class APIService {
         throw TokenException('Token Expired');
       }
       if (res != null) {
-        log(res.data.toString());
+        debugPrint(res.data.toString());
         throw res.data;
       } else {
         throw 'Unknown Error';
@@ -90,4 +90,5 @@ class APIService {
   Uri category() => _buildUri(endpoints: '/api/ingredient-category/');
   Uri ingredientByCategory(String category) =>
       _buildUri(endpoints: '/api/ingredient-category/$category');
+  Uri userRecipe() => _buildUri(endpoints: '/api/my-recipe/');
 }

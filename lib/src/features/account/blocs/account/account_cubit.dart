@@ -14,7 +14,9 @@ class AccountCubit extends Cubit<AccountState> {
     emit(AccountLoading());
     try {
       var tokens = await storageRepo.getTokens();
-      final data = await userRepo.getAccount(tokens['access']!);
+      final user = await userRepo.getAccount(tokens['access']!);
+      final recipes = await userRepo.getAccountRecipe(tokens['access']!);
+      final data = {'user': user, 'recipes': recipes};
       emit(AccountLoaded(data));
     } catch (e) {
       emit(AccountLoadError(e.toString()));

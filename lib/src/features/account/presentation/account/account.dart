@@ -7,6 +7,7 @@ import '../../../../shared/circle_net_pic.dart';
 import '../../../../shared/error_screen.dart';
 import '../../../../shared/loading_screen.dart';
 import '../../../../shared/recipe_card.dart';
+import '../../../recipe/domain/recipe/recipe.dart';
 import '../../blocs/account/account_cubit.dart';
 import '../../blocs/account/account_state.dart';
 import '../../repository/user_repository_impl.dart';
@@ -39,7 +40,9 @@ class Account extends StatelessWidget {
               ),
             );
           } else if (state is AccountLoaded) {
-            return const AccountCustomScroll();
+            return AccountCustomScroll(
+              data: state.data,
+            );
           } else {
             return const SizedBox();
           }
@@ -50,7 +53,9 @@ class Account extends StatelessWidget {
 }
 
 class AccountCustomScroll extends StatefulWidget {
-  const AccountCustomScroll({super.key});
+  const AccountCustomScroll({super.key, required this.data});
+
+  final data;
 
   @override
   State<AccountCustomScroll> createState() => _AccountCustomScrollState();
@@ -93,15 +98,17 @@ class _AccountCustomScrollState extends State<AccountCustomScroll> {
             backgroundColor: Styles.color.primary,
             pinned: true,
             elevation: 0,
-            flexibleSpace: const FlexibleSpaceBar(
+            flexibleSpace: FlexibleSpaceBar(
               collapseMode: CollapseMode.parallax,
               background: Padding(
-                padding: EdgeInsets.only(
+                padding: const EdgeInsets.only(
                   left: 20,
                   right: 20,
                   top: 75,
                 ),
-                child: AccountHeader(),
+                child: AccountHeader(
+                  accountData: widget.data['user'],
+                ),
               ),
             ),
             title: GestureDetector(
@@ -124,13 +131,15 @@ class _AccountCustomScrollState extends State<AccountCustomScroll> {
                         color: Colors.black,
                         borderRadius: BorderRadius.circular(100),
                       ),
-                      child: const CircleNetPic(),
+                      child: CircleNetPic(
+                        img: widget.data['user']['image'],
+                      ),
                     ),
                     const SizedBox(
                       width: 10,
                     ),
                     Text(
-                      'JohnDower',
+                      widget.data['user']['username'],
                       style: Styles.font.bsm,
                     ),
                   ],
@@ -174,14 +183,29 @@ class _AccountCustomScrollState extends State<AccountCustomScroll> {
             delegate: BodyHeader(),
             pinned: true,
           ),
-          SliverList(
-            delegate: SliverChildBuilderDelegate(
-              childCount: 10,
-              (context, index) {
-                return const RecipeCard();
-              },
-            ),
-          )
+          widget.data['recipes']['results'].length == 0
+              ? SliverFillRemaining(
+                  child: Center(
+                    child: Text(
+                      'Saat ini anda belum membuat resep',
+                      style: Styles.font.bsm.copyWith(
+                        color: Colors.black54,
+                      ),
+                    ),
+                  ),
+                )
+              : SliverList(
+                  delegate: SliverChildBuilderDelegate(
+                    childCount: widget.data['recipes']['results'].length as int,
+                    (context, index) {
+                      return RecipeCard(
+                        recipe: Recipe.fromJson(
+                          widget.data['recipes']['results'][index],
+                        ),
+                      );
+                    },
+                  ),
+                )
         ],
       ),
     );

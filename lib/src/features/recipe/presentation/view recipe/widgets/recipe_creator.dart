@@ -32,7 +32,7 @@ class RecipeCreatorCard extends StatelessWidget {
         children: [
           Row(
             children: [
-              const CircleNetPic(),
+              CircleNetPic(),
               const SizedBox(
                 width: 15,
               ),
