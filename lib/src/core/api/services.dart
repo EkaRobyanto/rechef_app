@@ -58,13 +58,12 @@ class APIService {
           throw NetworkException('Connection Timeout');
         },
       );
-      // debugPrint(response.data.toString());
+      // debugPrint(response.data);
       return parse(response.data);
     } on DioException catch (e) {
       Response? res = e.response;
       log('=====Call Error=====');
       log(res?.statusCode.toString() ?? 'Unknown Error');
-
       if (res?.data['detail'] == 'Given token not valid for any token type') {
         throw TokenException('Token Expired');
       }
@@ -87,6 +86,7 @@ class APIService {
 
   Uri detailRecipe(String id) =>
       _buildUri(endpoints: '/api/recipe/$id'); //edit recipe delete recipe
+  Uri favoriteRecipe() => _buildUri(endpoints: '/api/favorite/');
   Uri category() => _buildUri(endpoints: '/api/ingredient-category/');
   Uri ingredientByCategory(String category) =>
       _buildUri(endpoints: '/api/ingredient-category/$category');

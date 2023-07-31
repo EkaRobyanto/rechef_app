@@ -9,14 +9,27 @@ class UserRepositoryImpl extends UserRepository {
 
   @override
   Future<dynamic> getFavorite(String token) async {
-    await Future.delayed(const Duration(seconds: 2));
-    return Future.value([]);
+    try {
+      return await api.call(
+        request: () async {
+          return await client.getUri(
+            api.favoriteRecipe(),
+            options: Options(
+              headers: {'Authorization': 'Bearer $token'},
+            ),
+          );
+        },
+        parse: (data) => data,
+      );
+    } catch (e) {
+      rethrow;
+    }
   }
 
   @override
   Future getAccount(String token) async {
     try {
-      api.call(
+      return await api.call(
         request: () async {
           return await client.getUri(
             api.profileUrl(),
@@ -30,6 +43,5 @@ class UserRepositoryImpl extends UserRepository {
     } catch (e) {
       throw (e.toString());
     }
-    return Future.value('');
   }
 }

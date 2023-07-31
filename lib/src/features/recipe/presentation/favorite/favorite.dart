@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:rechef_app/src/constants/styles.dart';
+import 'package:rechef_app/src/core/repository/storage_repository.dart';
 
 import 'package:rechef_app/src/features/recipe/presentation/favorite/fav/favorite_cubit.dart';
 import 'package:rechef_app/src/shared/error_screen.dart';
@@ -19,42 +20,58 @@ class Favorite extends StatelessWidget {
       body: BlocProvider(
         create: (context) => FavCubit(
           RepositoryProvider.of<UserRepositoryImpl>(context),
-        )..loadFav(''),
+          RepositoryProvider.of<StorageRepository>(context),
+        )..loadFav(),
         child: BlocBuilder<FavCubit, FavoriteState>(
           builder: (context, state) {
-            if (state is FavoriteLoading) {
-              return const LoadingScreen();
+            if (state is FavoriteLoaded) {
+              return SafeArea(
+                child: Padding(
+                  padding: const EdgeInsets.all(10),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text('Resep Favorit Kamu', style: Styles.font.bold),
+                      const SizedBox(
+                        height: 20,
+                      ),
+                      state.favs.isEmpty
+                          ? Expanded(
+                              child: Center(
+                                child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    const Icon(Icons.favorite_border,
+                                        size: 100),
+                                    const SizedBox(height: 20),
+                                    Text('Kamu belum memiliki resep favorit',
+                                        style: Styles.font.base),
+                                  ],
+                                ),
+                              ),
+                            )
+                          : Expanded(
+                              child: ListView.builder(
+                                itemCount: 10,
+                                shrinkWrap: true,
+                                itemBuilder: (context, index) {
+                                  return const RecipeCard();
+                                },
+                              ),
+                            ),
+                    ],
+                  ),
+                ),
+              );
             } else if (state is FavoriteError) {
               return ErrorScreen(
                 error: state.message,
                 onRetry: () {
-                  context.read<FavCubit>().loadFav('');
+                  context.read<FavCubit>().loadFav();
                 },
               );
             }
-            return SafeArea(
-              child: Padding(
-                padding: const EdgeInsets.all(10),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text('Resep Favorit Kamu', style: Styles.font.bold),
-                    const SizedBox(
-                      height: 20,
-                    ),
-                    Expanded(
-                      child: ListView.builder(
-                        itemCount: 10,
-                        shrinkWrap: true,
-                        itemBuilder: (context, index) {
-                          return const RecipeCard();
-                        },
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            );
+            return const LoadingScreen();
           },
         ),
       ),

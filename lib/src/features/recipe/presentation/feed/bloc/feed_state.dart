@@ -15,6 +15,7 @@ class FeedError extends FeedState {
   List<Object?> get props => [error];
 }
 
+// ignore: must_be_immutable
 class FeedLoaded extends FeedState {
   List<dynamic> data;
 

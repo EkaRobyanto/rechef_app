@@ -13,7 +13,7 @@ class FavoriteLoading extends FavoriteState {
 }
 
 class FavoriteLoaded extends FavoriteState {
-  final List<dynamic> favs;
+  final dynamic favs;
   FavoriteLoaded(this.favs);
   @override
   List<Object> get props => [favs];

@@ -94,11 +94,15 @@ class _FeedState extends State<Feed> with SingleTickerProviderStateMixin {
               BlocBuilder<FeedBloc, FeedState>(
                 builder: (context, state) {
                   if (state is FeedLoading) {
-                    return const LoadingScreen();
+                    return const Expanded(child: LoadingScreen());
                   } else if (state is FeedError) {
-                    return ErrorScreen(
-                      error: state.error,
-                      onRetry: () {},
+                    return Expanded(
+                      child: ErrorScreen(
+                        error: state.error,
+                        onRetry: () {
+                          context.read<FeedBloc>().add(LoadFeed());
+                        },
+                      ),
                     );
                   } else if (state is FeedLoaded) {
                     return Expanded(
